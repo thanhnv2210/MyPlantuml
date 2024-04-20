@@ -1,0 +1,79 @@
+@startmindmap
+'https://plantuml.com/mindmap-diagram
+
+caption English Vocabulary
+title Phraser Verb
+
+*[#Orange] <&flag>Phraser Verb
+
+left side
+'There are two types of phrasal verbs.
+'**[#lightgreen] Inseparable and Separable
+**: <b>Inseparable and Separable
+'-- Inseparable --
+1.Inseparable phrasal verbs <color:red><b>cannot be separated</color> by other words.
+'-- Separable --
+2.Separable phrasal verbs <color:red><b>can be broken up</color> by other words
+'+) A + Object + B
+'+) A + B + Object
+Note: If the object is a pronoun, it <color:red><b>must always</color> be placed in the middle of a separable phrasal verb.
+Example: Pick it up and carry it to the kitchen
+;
+
+right side
+
+'Transitive phrasal verbs use a direct object
+**[#lightgreen] 1.Transitive + sth
+***_ <color:red><b>Put Up With</color>: Chịu đựng
+***_ <color:blue><b>Get Over</color>: Vượt qua
+***_ <color:blue>back [x] up</color>: to support or defend someone
+'****_ When the class was making fun of me, only the teacher backed me up.
+***_ <color:blue>check [x] out</color>: to examine a person or thing;
+'when used in reference to a person, can connote looking at them with romantic or sexual interest
+'****_ I’ll check the contract out. / I’ll check out the contract.
+***_ <color:blue>cheer [x] up</color>: to make someone happy, especially if they were previously sad
+***_ <color:blue>clean [x] up</color>: to tidy an area
+***_ <color:blue>come between [x]</color>: to interfere with a relationship between two people
+***_ <color:blue>come down with [x]</color>: to catch an illness (sự ốm yếu)
+
+'***_ come out of [x] to happen as a consequence of another event
+
+
+**[#lightgreen] 2. Intransitive
+'Intransitive phrasal verbs (Nội động từ) do not use an object
+'Inseparable phrasal verbs cannot be split up; the verb and the particle must staytogether.
+'All intransitive phrasal verbs are inseparable.
+'Some transitive phrasal verbs are also inseparable
+***_ <color:blue><b>carry on</color>: Tiếp tục ~ continue
+***_ <color:blue><b>go over</color>: đi qua
+***_ <color:blue>call around</color>: to contact multiple people
+'****_ Roy called around to find a nearby mechanic.
+
+***_ <color:blue><b>come around</color>: to change one’s opinion or see a new point of view
+***_ <color:blue><b>come up</color>: \n-to arise as a topic of discussion or receive attention\n-to approach \n-to present itself or occur, as of an event or situation
+***_ <color:blue><b>TMP</color>: TMP
+
+
+
+
+left side
+**[#lightblue] Learned
+'***_ <color:blue><b>go over</color>: đi qua
+***_ <color:blue><b>break down</color>: to stop working, especially in reference to machines
+'****_ The ice cream machine at McDonald’s often breaks down.
+***_ <color:blue><b>calm down</color>: to relax after an energetic or irritated state
+'****_ I need a few minutes to calm down after that match.
+
+
+
+'header
+'My super header
+'endheader
+
+'center footer My super footer
+
+'legend right
+'  Short
+'  legend
+'endlegend
+@endmindmap
