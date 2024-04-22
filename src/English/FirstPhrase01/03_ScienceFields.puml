@@ -1,0 +1,134 @@
+@startmindmap
+caption English Vocabulary
+title Scientific
+
+*[#Orange] <&flag>Fields of Science
+left side
+**[#lightgreen]_ 1.Physics
+'***_ <color:red>Hot
+'***_ <color:orange>Warm
+'***_ Mild: ấm áp
+'***_ <color:blue>Cool: mát mẻ
+'***_ Cold: lạnh
+'***_ Freezing: giá lạnh
+'***_ Classical Physics
+'***_ Quantum Mechanics
+'***_ Astrophysics
+'***_ Nuclear Physics
+
+**[#lightgreen]_ 2.Chemistry
+'***_ Organic Chemistry
+'***_ Inorganic Chemistry
+'***_ Physical Chemistry
+'***_ Analytical Chemistry
+
+**[#lightgreen]_ 3.<color:red><b>Biology</color>: Sinh vật học
+'Genetics
+'Ecology
+'Microbiology
+'Evolutionary Biology
+
+**[#lightgreen]_ 4.<color:red><b>Astronomy</color>: Thiên văn học
+'Observational Astronomy
+'Theoretical Astronomy
+'Astrophysics
+'Cosmology
+
+**[#lightgreen]_ 5.<color:red>Geology</color>: Địa chất học
+'Petrology
+'Paleontology
+'Volcanology
+'Seismology
+
+**[#lightgreen]_ 6.Environmental Science:
+'Environmental Chemistry
+'Environmental Biology
+'Environmental Geology
+'Conservation Science
+
+**[#lightgreen]_ 7.<color:red>Meteorology</color>: Khí tượng học
+'Climatology
+'Atmospheric Science
+'Meteorological Modeling
+'Weather Forecasting
+
+**[#lightgreen]_ 8.<color:gray>Oceanography</color>: Hải dương học
+'Physical Oceanography
+'Chemical Oceanography
+'Biological Oceanography
+'Marine Geology
+
+**[#lightgreen]_ 9.<color:red>Neuroscience</color>: Thần kinh học
+'Cognitive Neuroscience
+'Behavioral Neuroscience
+'Molecular Neuroscience
+'Neurophysiology
+
+**[#lightgreen]_ 10.Mathematics:
+'Pure Mathematics
+'Applied Mathematics
+'Statistics
+'Mathematical Physics
+
+right side
+**[#lightgreen]_ 11.Computer Science:
+'Artificial Intelligence
+'Data Science
+'Computer Networks
+'Software Engineering
+
+**[#lightgreen]_ 12.<color:red><b>Psychology</color>: Tâm lý học
+'Clinical Psychology
+'Cognitive Psychology
+'Social Psychology
+'Developmental Psychology
+
+**[#lightgreen]_ 13.<color:red>Anthropology</color>: Nhân chủng học
+'Cultural Anthropology
+'Archaeology
+'Biological Anthropology
+'Linguistic Anthropology
+
+**[#lightgreen]_ 14.<color:red><b>Sociology</color>: Xã hội học
+'Social Psychology
+'Criminology
+'Demography
+'Urban Sociology
+
+**[#lightgreen]_ 15.Economics:
+'Microeconomics
+'Macroeconomics
+'Econometrics
+'Behavioral Economics
+
+**[#lightgreen]_ 16.<color:red><b>Political Science</color>: chính trị
+'International Relations
+'Political Theory
+'Comparative Politics
+'Public Administration
+
+**[#lightgreen]_ 17.<color:red><b>Philosophy of Science</color>: Triết học
+'Epistemology
+'Metaphysics
+'Philosophy of Biology
+'Philosophy of Physics
+
+**[#lightgreen]_ 18.Medicine:
+'Internal Medicine
+'Surgery
+'Pediatrics
+'Psychiatry
+
+**[#lightgreen]_ 19.Engineering:
+'Civil Engineering
+'Mechanical Engineering
+'Electrical Engineering
+'Aerospace Engineering
+
+**[#lightgreen]_ 20.Materials Science:
+'Nanotechnology
+'Biomaterials
+'Electronic Materials
+'Polymer Science
+
+@endmindmap

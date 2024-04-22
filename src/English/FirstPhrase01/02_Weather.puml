@@ -1,0 +1,56 @@
+@startmindmap
+caption English Vocabulary
+title Weather
+
+*[#Orange] <&flag>Weather
+**[#lightgreen] Temperature
+***_ <color:red>Hot
+***_ <color:orange>Warm
+***_ Mild: ấm áp
+***_ <color:blue>Cool: mát mẻ
+***_ Cold: lạnh
+***_ Freezing: giá lạnh
+**[#lightgreen] Wind:
+***_ Breezy: mát mẻ
+***_ <color:blue>Windy: có gió
+'***_ Gale = very strong wind
+'***_ Gust
+***_ <color:red>Whirlwind: cơn lốc
+**[#lightgreen] Clouds:
+***_ <color:gray>Cloudy: nhiều mây
+'***_ Overcast: u ám
+'***_ Partly cloudy
+***_ <color:blue>Clear skies: quang đãng
+'***_ Cumulus clouds
+'***_ Stratus clouds
+'***_ Cirrus clouds
+'***_ Cumulonimbus clouds
+left side
+**[#lightgreen] Atmospheric Conditions:
+***_ Humid (ẩm)
+***_ <color:blue>Dry
+'***_ Damp
+***_ <color:red>Foggy: <&eye> <1km
+***_ <color:orange>Misty: light foggy <&eye> >1km
+***_ <color:red>Smoggy: <&smoke>smoke + foggy
+'***_ haze
+**[#lightgreen] Weather Phenomena:
+***_ <color:red>Thunderstorm
+'(giông bão) = storm (bão) + Thunder(sấm sét)
+***_ <color:orange>Lightning (sét)
+'***_ Tornado
+***_ <color:red>Hurricane (bão)
+'***_ Cyclone
+***_ <color:blue>Rainbow
+**[#lightgreen] Natural Events:
+***_ Sunrise
+***_ Sunset
+'***_ Dawn
+'***_ Dusk
+**[#lightgreen] Climate:
+***_ <&sun><&sun><color:green>Tropical (Nhiệt đới)
+***_ <&sun><&rain>Subtropical (Cận nhiệt đới)
+***_ Temperate (ôn đới)
+***_ Polar (cực)
+
+@endmindmap

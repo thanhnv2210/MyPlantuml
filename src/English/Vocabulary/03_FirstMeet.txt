@@ -1,0 +1,3 @@
+devolve(v) chuyển giao
+
+dangle(v) --> dangling(adj) lủng lẳng
