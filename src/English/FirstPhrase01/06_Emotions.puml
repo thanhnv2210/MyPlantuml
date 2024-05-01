@@ -1,0 +1,57 @@
+@startmindmap
+caption English Vocabulary
+title Human's Emotions
+
+*[#Orange] <&flag>Emotions
+left side
+**[#lightblue] Learned
+***:--<color:green>Positive--
+satisfied
+surprised
+happy
+shy
+--<color:violet>Complex--
+confused
+curious
+wonder
+--<color:red>Negative--
+afraid
+angry
+bored
+disappointed
+exhausted
+hate
+sad
+unhappy
+;
+
+
+right side
+**[#lightgreen] Positive
+***_ <color:red>amused</color>: thích thú
+***_ <color:red>astonished</color>: ngạc nhiên ~surprise, amaze
+***_ <color:red><b>delighted</color>: vui mừng
+***_ <color:red><b>composed</color>: điềm tĩnh, bình tĩnh
+***_ <color:red>awe</color>: kinh ngạc
+***_ <color:red>grateful</color>: biết ơn
+***_ <color:red><b>modest</color>: khiêm tốn
+***_ <color:red><b>serene</color>: thanh thản
+***_ <color:red>hopeful</color>: hy vọng
+
+**[#red] Negative
+***_ <color:red><b>annoyed</color>: khó chịu
+***_ <color:red><b>disgust</color>: ghê tởm, chán ghét
+***_ <color:red>loathing</color>: ghê tởm
+***_ <color:red><b>silly</color>: ngớ ngẩn
+***_ <color:red><b>weepy</color>: khóc lóc
+***_ <color:red>withdrawn</color>: tránh xa
+***_ <color:red>appalled</color>: kinh hoàng
+
+**[#violet] Complex
+***_ <color:red><b>determined</color>: quả quyết (positive)
+***_ <color:red><b>hysterical</color>: cuồng loạn (negative)
+***_ <color:red><b>sneaky</color>: lén lút (negative)
+***_ <color:red><b>brooding</color>: ấp ủ, lo nghĩ (negative)
+
+
+@endmindmap
