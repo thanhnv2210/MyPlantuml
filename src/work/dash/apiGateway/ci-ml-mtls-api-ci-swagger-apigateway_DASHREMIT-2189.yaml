@@ -1,0 +1,2847 @@
+---
+swagger: "2.0"
+info:
+  description: "Managed by Terraform. Do not edit from API Gateway Console"
+  version: "2021-08-10T00:19:25Z"
+  title: "ci-ml-mtls-api"
+host: "dev.ml.dash.com.sg"
+schemes:
+  - "https"
+paths:
+  /api/v1/auth/keys:
+    get:
+      produces:
+        - "application/json"
+      parameters:
+        - name: "cipher-text"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "x-api-key"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "partner-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "requestId"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "correlation-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "dash-api-key"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "timestamp"
+          in: "header"
+          required: false
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      security:
+        - api_key: []
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "GET"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/auth/keys"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        type: "http_proxy"
+  /api/v1/auth/login:
+    post:
+      produces:
+        - "application/json"
+      parameters:
+        - name: "correlation-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "cipher-text"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "x-api-key"
+          in: "header"
+          required: true
+          type: "string"
+        - name: "partner-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "nonce"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "timestamp"
+          in: "header"
+          required: false
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      security:
+        - api_key: []
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "POST"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/auth/login"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        type: "http_proxy"
+  /api/v1/auth/login/otp:
+    post:
+      produces:
+        - "application/json"
+      parameters:
+        - name: "correlation-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "cipher-text"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "x-api-key"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "partner-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "nonce"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "timestamp"
+          in: "header"
+          required: false
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      security:
+        - api_key: []
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "POST"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/auth/login/otp"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        type: "http_proxy"
+  /api/v1/auth/otp/request:
+    post:
+      produces:
+        - "application/json"
+      parameters:
+        - name: "correlation-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "cipher-text"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "x-api-key"
+          in: "header"
+          required: true
+          type: "string"
+        - name: "partner-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "nonce"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "timestamp"
+          in: "header"
+          required: false
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      security:
+        - api_key: []
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "POST"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/auth/otp/request"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        type: "http_proxy"
+  /api/v1/auth/otp/verify:
+    post:
+      produces:
+        - "application/json"
+      parameters:
+        - name: "cipher-text"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "x-api-key"
+          in: "header"
+          required: true
+          type: "string"
+        - name: "partner-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "nonce"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "Authorization"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "correlation-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "timestamp"
+          in: "header"
+          required: false
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      security:
+        - api_key: []
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "POST"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/auth/otp/verify"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        type: "http_proxy"
+  /api/v1/auth/pin:
+    post:
+      produces:
+        - "application/json"
+      parameters:
+        - name: "correlation-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "cipher-text"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "x-api-key"
+          in: "header"
+          required: true
+          type: "string"
+        - name: "nonce"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "timestamp"
+          in: "header"
+          required: false
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      security:
+        - api_key: []
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "POST"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/auth/pin"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        type: "http_proxy"
+  /api/v1/auth/user:
+    get:
+      produces:
+        - "application/json"
+      parameters:
+        - name: "correlation-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "x-api-key"
+          in: "header"
+          required: true
+          type: "string"
+        - name: "partner-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "Authorization"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "nonce"
+          in: "header"
+          required: false
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      security:
+        - api_key: []
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "GET"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/auth/user"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        type: "http_proxy"
+  /api/v1/customers/account:
+    get:
+      produces:
+        - "application/json"
+      parameters:
+        - name: "correlation-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "cipher-text"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "x-api-key"
+          in: "header"
+          required: true
+          type: "string"
+        - name: "partner-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "Authorization"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "timestamp"
+          in: "header"
+          required: false
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      security:
+        - api_key: []
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "GET"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/customers/account"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        type: "http_proxy"
+  /api/v1/customers/balance:
+    get:
+      produces:
+        - "application/json"
+      parameters:
+        - name: "correlation-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "cipher-text"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "x-api-key"
+          in: "header"
+          required: true
+          type: "string"
+        - name: "partner-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "Authorization"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "timestamp"
+          in: "header"
+          required: false
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      security:
+        - api_key: []
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "GET"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/customers/balance"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        type: "http_proxy"
+  /api/v1/customers/bene:
+    get:
+      produces:
+        - "application/json"
+      parameters:
+        - name: "pageNo"
+          in: "query"
+          required: false
+          type: "string"
+        - name: "pageSize"
+          in: "query"
+          required: false
+          type: "string"
+        - name: "cipher-text"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "x-api-key"
+          in: "header"
+          required: true
+          type: "string"
+        - name: "partner-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "Authorization"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "nonce"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "correlation-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "timestamp"
+          in: "header"
+          required: false
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      security:
+        - api_key: []
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "GET"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/customers/bene"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        type: "http_proxy"
+    post:
+      produces:
+        - "application/json"
+      parameters:
+        - name: "cipher-text"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "x-api-key"
+          in: "header"
+          required: true
+          type: "string"
+        - name: "partner-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "Authorization"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "nonce"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "correlation-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "timestamp"
+          in: "header"
+          required: false
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      security:
+        - api_key: []
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "POST"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/customers/bene"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        type: "http_proxy"
+    put:
+      produces:
+        - "application/json"
+      parameters:
+        - name: "cipher-text"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "x-api-key"
+          in: "header"
+          required: true
+          type: "string"
+        - name: "partner-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "Authorization"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "nonce"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "correlation-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "timestamp"
+          in: "header"
+          required: false
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      security:
+        - api_key: []
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "PUT"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/customers/bene"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        type: "http_proxy"
+  /api/v1/customers/bene/check:
+    post:
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      security:
+        - api_key: []
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "POST"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/customers/bene/check"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        type: "http_proxy"
+  /api/v1/customers/bene/remove:
+    post:
+      produces:
+        - "application/json"
+      parameters:
+        - name: "cipher-text"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "x-api-key"
+          in: "header"
+          required: true
+          type: "string"
+        - name: "partner-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "Authorization"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "nonce"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "correlation-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "timestamp"
+          in: "header"
+          required: false
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      security:
+        - api_key: []
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "POST"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/customers/bene/remove"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        type: "http_proxy"
+  /api/v1/customers/bene/validate:
+    post:
+      produces:
+        - "application/json"
+      parameters:
+        - name: "partner-id"
+          in: "header"
+          required: false
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "POST"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/customers/bene/validate"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        type: "http_proxy"
+  /api/v1/customers/bene/{beneficiaryid}:
+    get:
+      produces:
+        - "application/json"
+      parameters:
+        - name: "beneficiaryid"
+          in: "path"
+          required: true
+          type: "string"
+        - name: "cipher-text"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "x-api-key"
+          in: "header"
+          required: true
+          type: "string"
+        - name: "partner-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "Authorization"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "nonce"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "correlation-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "timestamp"
+          in: "header"
+          required: false
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      security:
+        - api_key: []
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "GET"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/customers/bene/{beneficiaryid}"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+          integration.request.path.beneficiaryid: "method.request.path.beneficiaryid"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        type: "http_proxy"
+  /api/v1/customers/status:
+    post:
+      produces:
+        - "application/json"
+      parameters:
+        - name: "correlation-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "cipher-text"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "x-api-key"
+          in: "header"
+          required: true
+          type: "string"
+        - name: "partner-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "nonce"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "timestamp"
+          in: "header"
+          required: false
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      security:
+        - api_key: []
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "POST"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/customers/status"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        type: "http_proxy"
+  /api/v1/customers/transactions:
+    get:
+      produces:
+        - "application/json"
+      parameters:
+        - name: "pageNo"
+          in: "query"
+          required: false
+          type: "string"
+        - name: "pageSize"
+          in: "query"
+          required: false
+          type: "string"
+        - name: "cipher-text"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "x-api-key"
+          in: "header"
+          required: true
+          type: "string"
+        - name: "partner-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "Authorization"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "correlation-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "timestamp"
+          in: "header"
+          required: false
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      security:
+        - api_key: []
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "GET"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/customers/transactions"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        type: "http_proxy"
+  /api/v1/fx:
+    post:
+      produces:
+        - "application/json"
+      parameters:
+        - name: "cipher-text"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "x-api-key"
+          in: "header"
+          required: true
+          type: "string"
+        - name: "partner-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "Authorization"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "nonce"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "correlation-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "timestamp"
+          in: "header"
+          required: false
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      security:
+        - api_key: []
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "POST"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/fx"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        type: "http_proxy"
+  /api/v1/fx/global:
+    get:
+      produces:
+        - "application/json"
+      parameters:
+        - name: "correlation-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "cipher-text"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "x-api-key"
+          in: "header"
+          required: true
+          type: "string"
+        - name: "partner-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "timestamp"
+          in: "header"
+          required: false
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      security:
+        - api_key: []
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "GET"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/fx/global"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        cacheNamespace: "mpkcor"
+        cacheKeyParameters:
+          - "method.request.header.partner-id"
+        type: "http_proxy"
+  /api/v1/fx/ingest:
+    post:
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "POST"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/fx/ingest"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        type: "http_proxy"
+  /api/v1/payment/overseas/transactions:
+    get:
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      security:
+        - api_key: []
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "GET"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/payment/overseas/transactions"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        type: "http_proxy"
+    post:
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      security:
+        - api_key: []
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "POST"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/payment/overseas/transactions"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        type: "http_proxy"
+  /api/v1/payment/overseas/transactions/cancel:
+    post:
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      security:
+        - api_key: []
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "POST"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/payment/overseas/transactions/cancel"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        type: "http_proxy"
+  /api/v1/payment/overseas/transactions/confirm:
+    post:
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      security:
+        - api_key: []
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "POST"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/payment/overseas/transactions/confirm"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        type: "http_proxy"
+  /api/v1/products/payment/overseas/bene-msisdn:
+    post:
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      security:
+        - api_key: []
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "POST"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/products/payment/overseas/bene-msisdn"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        type: "http_proxy"
+  /api/v1/products/payment/overseas/discovery-services:
+    get:
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      security:
+        - api_key: []
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "GET"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/products/payment/overseas/discovery-services"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        type: "http_proxy"
+  /api/v1/products/payment/overseas/products:
+    get:
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      security:
+        - api_key: []
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "GET"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/products/payment/overseas/products"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        type: "http_proxy"
+  /api/v1/registration/onboard:
+    post:
+      produces:
+        - "application/json"
+      parameters:
+        - name: "correlation-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "cipher-text"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "x-api-key"
+          in: "header"
+          required: true
+          type: "string"
+        - name: "partner-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "nonce"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "timestamp"
+          in: "header"
+          required: false
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      security:
+        - api_key: []
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "POST"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/registration/onboard"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        type: "http_proxy"
+  /api/v1/registration/onboard/status:
+    post:
+      produces:
+        - "application/json"
+      parameters:
+        - name: "correlation-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "cipher-text"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "x-api-key"
+          in: "header"
+          required: true
+          type: "string"
+        - name: "partner-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "timestamp"
+          in: "header"
+          required: false
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      security:
+        - api_key: []
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "POST"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/registration/onboard/status"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        type: "http_proxy"
+  /api/v1/registration/upgrade:
+    post:
+      produces:
+        - "application/json"
+      parameters:
+        - name: "cipher-text"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "x-api-key"
+          in: "header"
+          required: true
+          type: "string"
+        - name: "partner-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "nonce"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "Authorization"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "correlation-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "timestamp"
+          in: "header"
+          required: false
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      security:
+        - api_key: []
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "POST"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/registration/upgrade"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        type: "http_proxy"
+  /api/v1/registration/upgrade/status:
+    get:
+      produces:
+        - "application/json"
+      parameters:
+        - name: "correlation-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "cipher-text"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "x-api-key"
+          in: "header"
+          required: true
+          type: "string"
+        - name: "partner-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "Authorization"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "timestamp"
+          in: "header"
+          required: false
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      security:
+        - api_key: []
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "GET"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/registration/upgrade/status"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        type: "http_proxy"
+  /api/v1/remittances:
+    post:
+      produces:
+        - "application/json"
+      parameters:
+        - name: "cipher-text"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "x-api-key"
+          in: "header"
+          required: true
+          type: "string"
+        - name: "partner-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "Authorization"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "nonce"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "correlation-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "timestamp"
+          in: "header"
+          required: false
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      security:
+        - api_key: []
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "POST"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/remittances"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        type: "http_proxy"
+  /api/v1/remittances/generate/{paymentMethod}:
+    post:
+      produces:
+        - "application/json"
+      parameters:
+        - name: "check-correlation-id"
+          in: "header"
+          required: true
+          type: "string"
+        - name: "cipher-text"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "x-api-key"
+          in: "header"
+          required: true
+          type: "string"
+        - name: "partner-id"
+          in: "header"
+          required: true
+          type: "string"
+        - name: "Authorization"
+          in: "header"
+          required: true
+          type: "string"
+        - name: "nonce"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "correlation-id"
+          in: "header"
+          required: true
+          type: "string"
+        - name: "paymentMethod"
+          in: "path"
+          required: true
+          type: "string"
+        - name: "timestamp"
+          in: "header"
+          required: false
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      security:
+        - api_key: []
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "POST"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/remittances/generate/{paymentMethod}"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+          integration.request.path.paymentMethod: "method.request.path.paymentMethod"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        type: "http_proxy"
+  /api/v1/remittances/paynow/creditnotification:
+    post:
+      produces:
+        - "application/json"
+      parameters:
+        - name: "x-api-key"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "correlation-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "partner-id"
+          in: "header"
+          required: false
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "POST"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/remittances/paynow/creditnotification"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        type: "http_proxy"
+  /api/v1/remittances/pending/{paymentMethod}:
+    get:
+      produces:
+        - "application/json"
+      parameters:
+        - name: "correlation-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "paymentMethod"
+          in: "path"
+          required: true
+          type: "string"
+        - name: "x-api-key"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "partner-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "Authorization"
+          in: "header"
+          required: false
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      security:
+        - api_key: []
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "GET"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/remittances/pending/{paymentMethod}"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+          integration.request.path.paymentMethod: "method.request.path.paymentMethod"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        type: "http_proxy"
+  /api/v1/remittances/transactions:
+    get:
+      produces:
+        - "application/json"
+      parameters:
+        - name: "correlation-id"
+          in: "header"
+          required: true
+          type: "string"
+        - name: "cipher-text"
+          in: "header"
+          required: true
+          type: "string"
+        - name: "partner-id"
+          in: "header"
+          required: true
+          type: "string"
+        - name: "Authorization"
+          in: "header"
+          required: true
+          type: "string"
+        - name: "nonce"
+          in: "header"
+          required: true
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      security:
+        - api_key: []
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "GET"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/remittances/transactions"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        type: "http_proxy"
+  /api/v1/remittances/transactions/partner-status:
+    post:
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "POST"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/remittances/transactions/partner-status"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        type: "http_proxy"
+  /api/v1/utility/cardtypes:
+    get:
+      produces:
+        - "application/json"
+      parameters:
+        - name: "correlation-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "x-api-key"
+          in: "header"
+          required: true
+          type: "string"
+        - name: "partner-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "timestamp"
+          in: "header"
+          required: false
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      security:
+        - api_key: []
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "GET"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/utility/cardtypes"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        type: "http_proxy"
+  /api/v1/utility/cities/{provinceid}:
+    get:
+      produces:
+        - "application/json"
+      parameters:
+        - name: "correlation-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "x-api-key"
+          in: "header"
+          required: true
+          type: "string"
+        - name: "provinceid"
+          in: "path"
+          required: true
+          type: "string"
+        - name: "partner-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "timestamp"
+          in: "header"
+          required: false
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      security:
+        - api_key: []
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "GET"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/utility/cities/{provinceid}"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.path.provinceid: "method.request.path.provinceid"
+          integration.request.header.gw-requestId: "context.requestId"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        cacheNamespace: "y0r7sd"
+        cacheKeyParameters:
+          - "method.request.path.provinceid"
+        type: "http_proxy"
+  /api/v1/utility/countries:
+    get:
+      produces:
+        - "application/json"
+      parameters:
+        - name: "correlation-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "x-api-key"
+          in: "header"
+          required: true
+          type: "string"
+        - name: "partner-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "timestamp"
+          in: "header"
+          required: false
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      security:
+        - api_key: []
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "GET"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/utility/countries"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        type: "http_proxy"
+  /api/v1/utility/issuers/{operatorID}/bank-account-verification:
+    post:
+      produces:
+        - "application/json"
+      parameters:
+        - name: "correlation-id"
+          in: "header"
+          required: true
+          type: "string"
+        - name: "x-api-key"
+          in: "header"
+          required: true
+          type: "string"
+        - name: "operatorID"
+          in: "path"
+          required: true
+          type: "string"
+        - name: "partner-id"
+          in: "header"
+          required: true
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      security:
+        - api_key: []
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "POST"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/utility/issuers/{operatorID}/bank-account-verification"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+          integration.request.path.operatorID: "method.request.path.operatorID"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        type: "http_proxy"
+  /api/v1/utility/issuers/{operatorID}/{flag}:
+    get:
+      produces:
+        - "application/json"
+      parameters:
+        - name: "flag"
+          in: "path"
+          required: true
+          type: "string"
+        - name: "x-api-key"
+          in: "header"
+          required: true
+          type: "string"
+        - name: "partner-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "countryId"
+          in: "query"
+          required: false
+          type: "string"
+        - name: "correlation-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "operatorID"
+          in: "path"
+          required: true
+          type: "string"
+        - name: "timestamp"
+          in: "header"
+          required: false
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      security:
+        - api_key: []
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "GET"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/utility/issuers/{operatorID}/{flag}"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+          integration.request.path.flag: "method.request.path.flag"
+          integration.request.path.operatorID: "method.request.path.operatorID"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        cacheNamespace: "f5e42q"
+        cacheKeyParameters:
+          - "method.request.path.flag"
+          - "method.request.path.operatorID"
+          - "method.request.querystring.countryId"
+        type: "http_proxy"
+  /api/v1/utility/languages:
+    get:
+      produces:
+        - "application/json"
+      parameters:
+        - name: "correlation-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "x-api-key"
+          in: "header"
+          required: true
+          type: "string"
+        - name: "accept-language"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "partner-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "timestamp"
+          in: "header"
+          required: false
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      security:
+        - api_key: []
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "GET"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/utility/languages"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        type: "http_proxy"
+  /api/v1/utility/occupations:
+    get:
+      produces:
+        - "application/json"
+      parameters:
+        - name: "correlation-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "x-api-key"
+          in: "header"
+          required: true
+          type: "string"
+        - name: "accept-language"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "partner-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "timestamp"
+          in: "header"
+          required: false
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      security:
+        - api_key: []
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "GET"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/utility/occupations"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        cacheNamespace: "y4vac5"
+        cacheKeyParameters:
+          - "method.request.header.accept-language"
+        type: "http_proxy"
+  /api/v1/utility/operators:
+    get:
+      produces:
+        - "application/json"
+      parameters:
+        - name: "correlation-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "x-api-key"
+          in: "header"
+          required: true
+          type: "string"
+        - name: "accept-language"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "partner-id"
+          in: "header"
+          required: false
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      security:
+        - api_key: []
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "GET"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/utility/operators"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        cacheNamespace: "zzood3"
+        cacheKeyParameters:
+          - "method.request.header.accept-language"
+        type: "http_proxy"
+  /api/v1/utility/operators/{countryId}:
+    get:
+      produces:
+        - "application/json"
+      parameters:
+        - name: "correlation-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "countryId"
+          in: "path"
+          required: true
+          type: "string"
+        - name: "x-api-key"
+          in: "header"
+          required: true
+          type: "string"
+        - name: "accept-language"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "partner-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "timestamp"
+          in: "header"
+          required: false
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      security:
+        - api_key: []
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "GET"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/utility/operators/{countryId}"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.path.countryId: "method.request.path.countryId"
+          integration.request.header.gw-requestId: "context.requestId"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        cacheNamespace: "zgbdhp"
+        cacheKeyParameters:
+          - "method.request.path.countryId"
+          - "method.request.header.accept-language"
+        type: "http_proxy"
+  /api/v1/utility/provinces/{countryId}:
+    get:
+      produces:
+        - "application/json"
+      parameters:
+        - name: "correlation-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "countryId"
+          in: "path"
+          required: true
+          type: "string"
+        - name: "x-api-key"
+          in: "header"
+          required: true
+          type: "string"
+        - name: "partner-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "timestamp"
+          in: "header"
+          required: false
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      security:
+        - api_key: []
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "GET"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/utility/provinces/{countryId}"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.path.countryId: "method.request.path.countryId"
+          integration.request.header.gw-requestId: "context.requestId"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        cacheNamespace: "qocws5"
+        cacheKeyParameters:
+          - "method.request.path.countryId"
+        type: "http_proxy"
+  /api/v1/utility/purposes:
+    get:
+      produces:
+        - "application/json"
+      parameters:
+        - name: "correlation-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "x-api-key"
+          in: "header"
+          required: true
+          type: "string"
+        - name: "accept-language"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "partner-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "timestamp"
+          in: "header"
+          required: false
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      security:
+        - api_key: []
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "GET"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/utility/purposes"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        cacheNamespace: "mw4k11"
+        cacheKeyParameters:
+          - "method.request.header.accept-language"
+        type: "http_proxy"
+  /api/v1/utility/receivingcountries:
+    get:
+      produces:
+        - "application/json"
+      parameters:
+        - name: "correlation-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "x-api-key"
+          in: "header"
+          required: true
+          type: "string"
+        - name: "partner-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "timestamp"
+          in: "header"
+          required: false
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      security:
+        - api_key: []
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "GET"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/utility/receivingcountries"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        cacheNamespace: "2n2ag5"
+        cacheKeyParameters:
+          - "method.request.header.partner-id"
+        type: "http_proxy"
+  /api/v1/utility/sourceofwealth:
+    get:
+      produces:
+        - "application/json"
+      parameters:
+        - name: "correlation-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "x-api-key"
+          in: "header"
+          required: true
+          type: "string"
+        - name: "accept-language"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "partner-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "timestamp"
+          in: "header"
+          required: false
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      security:
+        - api_key: []
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "GET"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/utility/sourceofwealth"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        cacheNamespace: "hf55ae"
+        cacheKeyParameters:
+          - "method.request.header.accept-language"
+        type: "http_proxy"
+  /api/v2/customers/bene/validate:
+    post:
+      produces:
+        - "application/json"
+      parameters:
+        - name: "partner-id"
+          in: "header"
+          required: false
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "POST"
+        uri: "https://${stageVariables.endpoint_url}/api/v2/customers/bene/validate"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        type: "http_proxy"
+  /api/v2/fx:
+    post:
+      produces:
+        - "application/json"
+      parameters:
+        - name: "cipher-text"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "x-api-key"
+          in: "header"
+          required: true
+          type: "string"
+        - name: "partner-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "Authorization"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "nonce"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "correlation-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "timestamp"
+          in: "header"
+          required: false
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      security:
+        - api_key: []
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "POST"
+        uri: "https://${stageVariables.endpoint_url}/api/v2/fx"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        type: "http_proxy"
+  /api/v2/registration/onboard:
+    post:
+      produces:
+        - "application/json"
+      parameters:
+        - name: "correlation-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "cipher-text"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "x-api-key"
+          in: "header"
+          required: true
+          type: "string"
+        - name: "partner-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "nonce"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "timestamp"
+          in: "header"
+          required: false
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      security:
+        - api_key: []
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "POST"
+        uri: "https://${stageVariables.endpoint_url}/api/v2/registration/onboard"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        type: "http_proxy"
+  /api/v2/registration/upgrade:
+    post:
+      produces:
+        - "application/json"
+      parameters:
+        - name: "cipher-text"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "x-api-key"
+          in: "header"
+          required: true
+          type: "string"
+        - name: "partner-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "nonce"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "Authorization"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "correlation-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "timestamp"
+          in: "header"
+          required: false
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      security:
+        - api_key: []
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "POST"
+        uri: "https://${stageVariables.endpoint_url}/api/v2/registration/upgrade"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        type: "http_proxy"
+  /api/v2/remittances:
+    post:
+      produces:
+        - "application/json"
+      parameters:
+        - name: "cipher-text"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "x-api-key"
+          in: "header"
+          required: true
+          type: "string"
+        - name: "partner-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "Authorization"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "nonce"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "correlation-id"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "timestamp"
+          in: "header"
+          required: false
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      security:
+        - api_key: []
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "POST"
+        uri: "https://${stageVariables.endpoint_url}/api/v2/remittances"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        type: "http_proxy"
+securityDefinitions:
+  api_key:
+    type: "apiKey"
+    name: "x-api-key"
+    in: "header"
+definitions:
+  Empty:
+    type: "object"
+    title: "Empty Schema"
+x-amazon-apigateway-documentation:
+  version: "1.0.0"
+  createdDate: "2024-04-26T04:16:32Z"
+  documentationParts:
+    - location:
+        type: "API"
+      properties:
+        info:
+          description: "Managed by Terraform. Do not edit from API Gateway Console"
+    - location:
+        type: "MODEL"
+        name: "Empty"
+      properties:
+        title: "Empty Schema"
+    - location:
+        type: "RESPONSE"
+        path: "/api/v1/auth/keys"
+        method: "GET"
+        statusCode: "200"
+      properties:
+        description: "200 response"
+    - location:
+        type: "RESPONSE"
+        path: "/api/v1/auth/login/otp"
+        method: "POST"
+        statusCode: "200"
+      properties:
+        description: "200 response"
+    - location:
+        type: "RESPONSE"
+        path: "/api/v1/auth/login"
+        method: "POST"
+        statusCode: "200"
+      properties:
+        description: "200 response"
+    - location:
+        type: "RESPONSE"
+        path: "/api/v1/auth/otp/request"
+        method: "POST"
+        statusCode: "200"
+      properties:
+        description: "200 response"
+    - location:
+        type: "RESPONSE"
+        path: "/api/v1/auth/otp/verify"
+        method: "POST"
+        statusCode: "200"
+      properties:
+        description: "200 response"
+    - location:
+        type: "RESPONSE"
+        path: "/api/v1/auth/pin"
+        method: "POST"
+        statusCode: "200"
+      properties:
+        description: "200 response"
+    - location:
+        type: "RESPONSE"
+        path: "/api/v1/auth/user"
+        method: "GET"
+        statusCode: "200"
+      properties:
+        description: "200 response"
+    - location:
+        type: "RESPONSE"
+        path: "/api/v1/customers/account"
+        method: "GET"
+        statusCode: "200"
+      properties:
+        description: "200 response"
+    - location:
+        type: "RESPONSE"
+        path: "/api/v1/customers/balance"
+        method: "GET"
+        statusCode: "200"
+      properties:
+        description: "200 response"
+    - location:
+        type: "RESPONSE"
+        path: "/api/v1/customers/bene/check"
+        method: "POST"
+        statusCode: "200"
+      properties:
+        description: "200 response"
+    - location:
+        type: "RESPONSE"
+        path: "/api/v1/customers/bene/remove"
+        method: "POST"
+        statusCode: "200"
+      properties:
+        description: "200 response"
+    - location:
+        type: "RESPONSE"
+        path: "/api/v1/customers/bene/validate"
+        method: "POST"
+        statusCode: "200"
+      properties:
+        description: "200 response"
+    - location:
+        type: "RESPONSE"
+        path: "/api/v1/customers/bene/{beneficiaryid}"
+        method: "GET"
+        statusCode: "200"
+      properties:
+        description: "200 response"
+    - location:
+        type: "RESPONSE"
+        path: "/api/v1/customers/bene"
+        method: "GET"
+        statusCode: "200"
+      properties:
+        description: "200 response"
+    - location:
+        type: "RESPONSE"
+        path: "/api/v1/customers/bene"
+        method: "POST"
+        statusCode: "200"
+      properties:
+        description: "200 response"
+    - location:
+        type: "RESPONSE"
+        path: "/api/v1/customers/bene"
+        method: "PUT"
+        statusCode: "200"
+      properties:
+        description: "200 response"
+    - location:
+        type: "RESPONSE"
+        path: "/api/v1/customers/status"
+        method: "POST"
+        statusCode: "200"
+      properties:
+        description: "200 response"
+    - location:
+        type: "RESPONSE"
+        path: "/api/v1/customers/transactions"
+        method: "GET"
+        statusCode: "200"
+      properties:
+        description: "200 response"
+    - location:
+        type: "RESPONSE"
+        path: "/api/v1/fx/global"
+        method: "GET"
+        statusCode: "200"
+      properties:
+        description: "200 response"
+    - location:
+        type: "RESPONSE"
+        path: "/api/v1/fx/ingest"
+        method: "POST"
+        statusCode: "200"
+      properties:
+        description: "200 response"
+    - location:
+        type: "RESPONSE"
+        path: "/api/v1/fx"
+        method: "POST"
+        statusCode: "200"
+      properties:
+        description: "200 response"
+    - location:
+        type: "RESPONSE"
+        path: "/api/v1/payment/overseas/transactions/cancel"
+        method: "POST"
+        statusCode: "200"
+      properties:
+        description: "200 response"
+    - location:
+        type: "RESPONSE"
+        path: "/api/v1/payment/overseas/transactions/confirm"
+        method: "POST"
+        statusCode: "200"
+      properties:
+        description: "200 response"
+    - location:
+        type: "RESPONSE"
+        path: "/api/v1/payment/overseas/transactions"
+        method: "GET"
+        statusCode: "200"
+      properties:
+        description: "200 response"
+    - location:
+        type: "RESPONSE"
+        path: "/api/v1/payment/overseas/transactions"
+        method: "POST"
+        statusCode: "200"
+      properties:
+        description: "200 response"
+    - location:
+        type: "RESPONSE"
+        path: "/api/v1/products/payment/overseas/bene-msisdn"
+        method: "POST"
+        statusCode: "200"
+      properties:
+        description: "200 response"
+    - location:
+        type: "RESPONSE"
+        path: "/api/v1/products/payment/overseas/discovery-services"
+        method: "GET"
+        statusCode: "200"
+      properties:
+        description: "200 response"
+    - location:
+        type: "RESPONSE"
+        path: "/api/v1/products/payment/overseas/products"
+        method: "GET"
+        statusCode: "200"
+      properties:
+        description: "200 response"
+    - location:
+        type: "RESPONSE"
+        path: "/api/v1/registration/onboard/status"
+        method: "POST"
+        statusCode: "200"
+      properties:
+        description: "200 response"
+    - location:
+        type: "RESPONSE"
+        path: "/api/v1/registration/onboard"
+        method: "POST"
+        statusCode: "200"
+      properties:
+        description: "200 response"
+    - location:
+        type: "RESPONSE"
+        path: "/api/v1/registration/upgrade/status"
+        method: "GET"
+        statusCode: "200"
+      properties:
+        description: "200 response"
+    - location:
+        type: "RESPONSE"
+        path: "/api/v1/registration/upgrade"
+        method: "POST"
+        statusCode: "200"
+      properties:
+        description: "200 response"
+    - location:
+        type: "RESPONSE"
+        path: "/api/v1/remittances/generate/{paymentMethod}"
+        method: "POST"
+        statusCode: "200"
+      properties:
+        description: "200 response"
+    - location:
+        type: "RESPONSE"
+        path: "/api/v1/remittances/paynow/creditnotification"
+        method: "POST"
+        statusCode: "200"
+      properties:
+        description: "200 response"
+    - location:
+        type: "RESPONSE"
+        path: "/api/v1/remittances/pending/{paymentMethod}"
+        method: "GET"
+        statusCode: "200"
+      properties:
+        description: "200 response"
+    - location:
+        type: "RESPONSE"
+        path: "/api/v1/remittances/transactions/partner-status"
+        method: "POST"
+        statusCode: "200"
+      properties:
+        description: "200 response"
+    - location:
+        type: "RESPONSE"
+        path: "/api/v1/remittances/transactions"
+        method: "GET"
+        statusCode: "200"
+      properties:
+        description: "200 response"
+    - location:
+        type: "RESPONSE"
+        path: "/api/v1/remittances"
+        method: "POST"
+        statusCode: "200"
+      properties:
+        description: "200 response"
+    - location:
+        type: "RESPONSE"
+        path: "/api/v1/utility/cardtypes"
+        method: "GET"
+        statusCode: "200"
+      properties:
+        description: "200 response"
+    - location:
+        type: "RESPONSE"
+        path: "/api/v1/utility/cities/{provinceid}"
+        method: "GET"
+        statusCode: "200"
+      properties:
+        description: "200 response"
+    - location:
+        type: "RESPONSE"
+        path: "/api/v1/utility/countries"
+        method: "GET"
+        statusCode: "200"
+      properties:
+        description: "200 response"
+    - location:
+        type: "RESPONSE"
+        path: "/api/v1/utility/issuers/{operatorID}/bank-account-verification"
+        method: "POST"
+        statusCode: "200"
+      properties:
+        description: "200 response"
+    - location:
+        type: "RESPONSE"
+        path: "/api/v1/utility/issuers/{operatorID}/{flag}"
+        method: "GET"
+        statusCode: "200"
+      properties:
+        description: "200 response"
+    - location:
+        type: "RESPONSE"
+        path: "/api/v1/utility/languages"
+        method: "GET"
+        statusCode: "200"
+      properties:
+        description: "200 response"
+    - location:
+        type: "RESPONSE"
+        path: "/api/v1/utility/occupations"
+        method: "GET"
+        statusCode: "200"
+      properties:
+        description: "200 response"
+    - location:
+        type: "RESPONSE"
+        path: "/api/v1/utility/operators/{countryId}"
+        method: "GET"
+        statusCode: "200"
+      properties:
+        description: "200 response"
+    - location:
+        type: "RESPONSE"
+        path: "/api/v1/utility/operators"
+        method: "GET"
+        statusCode: "200"
+      properties:
+        description: "200 response"
+    - location:
+        type: "RESPONSE"
+        path: "/api/v1/utility/provinces/{countryId}"
+        method: "GET"
+        statusCode: "200"
+      properties:
+        description: "200 response"
+    - location:
+        type: "RESPONSE"
+        path: "/api/v1/utility/purposes"
+        method: "GET"
+        statusCode: "200"
+      properties:
+        description: "200 response"
+    - location:
+        type: "RESPONSE"
+        path: "/api/v1/utility/receivingcountries"
+        method: "GET"
+        statusCode: "200"
+      properties:
+        description: "200 response"
+    - location:
+        type: "RESPONSE"
+        path: "/api/v1/utility/sourceofwealth"
+        method: "GET"
+        statusCode: "200"
+      properties:
+        description: "200 response"
+    - location:
+        type: "RESPONSE"
+        path: "/api/v2/customers/bene/validate"
+        method: "POST"
+        statusCode: "200"
+      properties:
+        description: "200 response"
+    - location:
+        type: "RESPONSE"
+        path: "/api/v2/fx"
+        method: "POST"
+        statusCode: "200"
+      properties:
+        description: "200 response"
+    - location:
+        type: "RESPONSE"
+        path: "/api/v2/registration/onboard"
+        method: "POST"
+        statusCode: "200"
+      properties:
+        description: "200 response"
+    - location:
+        type: "RESPONSE"
+        path: "/api/v2/registration/upgrade"
+        method: "POST"
+        statusCode: "200"
+      properties:
+        description: "200 response"
+    - location:
+        type: "RESPONSE"
+        path: "/api/v2/remittances"
+        method: "POST"
+        statusCode: "200"
+      properties:
+        description: "200 response"
+x-amazon-apigateway-gateway-responses:
+  DEFAULT_4XX:
+    responseTemplates:
+      application/json: "{\"message\":\"Invalid resource\",\"type\": \"$context.error.responseType\"\
+        , \"code\" : \"1015\"}"
+x-amazon-apigateway-endpoint-configuration:
+  disableExecuteApiEndpoint: true
