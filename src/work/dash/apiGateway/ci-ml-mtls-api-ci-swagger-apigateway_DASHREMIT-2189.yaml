@@ -984,6 +984,157 @@ paths:
         passthroughBehavior: "when_no_match"
         connectionType: "VPC_LINK"
         type: "http_proxy"
+  /api/v1/payment/{payment-mode}/cards:
+    get:
+      produces:
+      - "application/json"
+      parameters:
+      - name: "payment-mode"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "x-api-key"
+        in: "header"
+        required: true
+        type: "string"
+      - name: "partner-id"
+        in: "header"
+        required: true
+        type: "string"
+      - name: "correlation-id"
+        in: "header"
+        required: true
+        type: "string"
+      - name: "device-id"
+        in: "header"
+        required: true
+        type: "string"
+      - name: "timestamp"
+        in: "header"
+        required: false
+        type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      security:
+      - api_key: []
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "GET"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/payment/{payment-mode}/cards"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+          integration.request.path.payment-mode: "method.request.path.payment-mode"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        type: "http_proxy"
+  /api/v1/payment/{payment-mode}/card/register:
+    post:
+      produces:
+      - "application/json"
+      parameters:
+      - name: "payment-mode"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "x-api-key"
+        in: "header"
+        required: true
+        type: "string"
+      - name: "partner-id"
+        in: "header"
+        required: true
+        type: "string"
+      - name: "correlation-id"
+        in: "header"
+        required: true
+        type: "string"
+      - name: "device-id"
+        in: "header"
+        required: true
+        type: "string"
+      - name: "timestamp"
+        in: "header"
+        required: false
+        type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      security:
+      - api_key: []
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "POST"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/payment/{payment-mode}/card/register"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+          integration.request.path.payment-mode: "method.request.path.payment-mode"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        type: "http_proxy"
+  /api/v1/payment/{payment-mode}/card/{card-id}/unregister:
+    put:
+      produces:
+      - "application/json"
+      parameters:
+      - name: "payment-mode"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "card-id"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "x-api-key"
+        in: "header"
+        required: true
+        type: "string"
+      - name: "partner-id"
+        in: "header"
+        required: true
+        type: "string"
+      - name: "correlation-id"
+        in: "header"
+        required: true
+        type: "string"
+      - name: "device-id"
+        in: "header"
+        required: true
+        type: "string"
+      - name: "timestamp"
+        in: "header"
+        required: false
+        type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      security:
+      - api_key: []
+      x-amazon-apigateway-integration:
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "PUT"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/payment/{payment-mode}/card/{card-id}/unregister"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+          integration.request.path.payment-mode: "method.request.path.payment-mode"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        type: "http_proxy"
   /api/v1/payment/overseas/transactions:
     get:
       produces:
