@@ -1,0 +1,197 @@
+---
+swagger: "2.0"
+info:
+  description: "Managed by Terraform. Do not edit from API Gateway Console"
+  version: "2021-08-10T00:19:25Z"
+  title: "ci-ml-partner-api"
+host: "partner.dev.ml.dash.com.sg"
+schemes:
+- "https"
+paths:
+  /api/v1/fx/web/global:
+    get:
+      produces:
+      - "application/json"
+      parameters:
+      - name: "correlation-id"
+        in: "header"
+        required: false
+        type: "string"
+      - name: "partner-id"
+        in: "header"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+      x-amazon-apigateway-integration:
+        type: "http_proxy"
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "GET"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/fx/global"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        cacheNamespace: "5z05jw"
+        cacheKeyParameters:
+        - "method.request.header.partner-id"
+    options:
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+            Access-Control-Allow-Methods:
+              type: "string"
+            Access-Control-Allow-Headers:
+              type: "string"
+      x-amazon-apigateway-integration:
+        type: "mock"
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'GET,OPTIONS'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+  /api/v1/payment/partner/overseas/transactions/callback:
+    post:
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      x-amazon-apigateway-integration:
+        type: "http_proxy"
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "POST"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/payment/partner/overseas/transactions/callback"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+  /api/v1/registration/callback:
+    post:
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      x-amazon-apigateway-integration:
+        type: "http_proxy"
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "POST"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/registration/callback"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+  /api/v1/remittances/callback:
+    post:
+      produces:
+      - "application/json"
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      x-amazon-apigateway-integration:
+        type: "aws_proxy"
+        httpMethod: "POST"
+        uri: "arn:aws:apigateway:ap-southeast-1:lambda:path/2015-03-31/functions/arn:aws:lambda:ap-southeast-1:063129431560:function:${stageVariables.lmb_fx_thunes_callback_handler}:${stageVariables.alias_fx_thunes_callback_handler}/invocations"
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: "when_no_match"
+        contentHandling: "CONVERT_TO_TEXT"
+  /api/v1/remittances/paynow/creditnotification:
+    post:
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      x-amazon-apigateway-integration:
+        type: "http_proxy"
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "POST"
+        uri: "https://${stageVariables.endpoint_url}/api/v1/remittances/paynow/creditnotification"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+  /api/v2/registration/callback:
+    post:
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      x-amazon-apigateway-integration:
+        type: "http_proxy"
+        connectionId: "${stageVariables.vpc_link}"
+        httpMethod: "POST"
+        uri: "https://${stageVariables.endpoint_url}/api/v2/registration/callback"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.header.gw-requestId: "context.requestId"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+definitions:
+  Empty:
+    type: "object"
+    title: "Empty Schema"
+x-amazon-apigateway-gateway-responses:
+  UNAUTHORIZED:
+    statusCode: 401
+    responseTemplates:
+      application/json: "{\"message\":\"Unauthorized\", \"code\" : \"401\"}"
+  DEFAULT_4XX:
+    responseTemplates:
+      application/json: "{\"message\":\"Invalid resource\",\"type\": \"$context.error.responseType\"\
+        , \"code\" : \"1015\"}"
+x-amazon-apigateway-endpoint-configuration:
+  disableExecuteApiEndpoint: true
