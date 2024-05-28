@@ -9,6 +9,29 @@ dense(adj) ??? ~thick | stupid | matter
 undertake(v) đảm nhận
 speculate(v) suy đoán
 roughly(adv) phỏng chừng, khoảng chừng
+toast(v,n) bánh mỳ nướng,
+autumn(n) fall (season)
+
+seasick(n) say sóng
+--execisi-- exercise(v,n) /ˈek.sə.saɪz/
+British(adj) /ˈbrɪt.ɪʃ/
+Bank clerk(n) Nhân viên ngân hàng
+cupboard(n) /ˈkʌb.əd/ cái tủ
+worktop(n) mặt bàn làm việc
+saucepan(n) cái chảo
+newsagent(n)  /ˈnjuːzˌeɪ.dʒənt/ quầy bán báo
+
+vandal(n) /ˈvæn.dəl/ sự phá hoại
+smash(v,n,adv) /smæʃ/ đập vỡ
+vandalism(n) /ˈvæn.dəl.ɪ.zəm/ sự phá hoại
+
+reporter
+mend(v) /mend/ sửa chữa
+untidy(adj) bừa bộn
+plaster(n, v) Băng dán
+had a row with
+
+insist(v): khăng khăng ???
 
 embarrassment(n): sự lúng túng
 embrace(v): ôm

@@ -2,6 +2,9 @@ devolve(v) chuyển giao
 
 dangle(v) --> dangling(adj) lủng lẳng
 
+oven(n) ~ cooker , gas grill, lò vi sóng
+swim/swam(v) đã bơi
+lorry(n) xe tải
 
 1) Noun
 
