@@ -21,18 +21,37 @@ skinparam State {
 
 state end1    <<end>>
 state end2    <<end>>
-state end3    <<end>>
-state end5    <<end>>
-[*] -down-> PAYMENT_VALIDATED : ML call Thunesto create transaction successfully
+'state end3    <<end>>
+'state end5    <<end>>
+'state endHappy    <<end>>
+state PAYMENT_VALIDATED #lightgreen : create Transaction on Thune
+state PAYMENT_VALIDATED_FAILED #lightpink : Txn not Created on Thunes
+state PAYMENT_AML_FAIL #lightpink : Customer was blocked.
+state PAYMENT_ACCEPTED #lightgreen : User not block on AML
+state PAYMENT_RESERVED #lightgreen : Reserved amount on customer wallet
+state PAYMENT_TIMEOUT #plum : call Telepin to inquiry transaction
+state PAYMENT_REFUND_REQUIRED #lightpink : call Refund on Telepin
+state TRANSACTION_SUBMITTED #lightgreen : submitted to destination bank
+state TRANSACTION_AVAILABLE #plum : TBD
+state TRANSACTION_DECLINED #lightpink : The transaction is declined by the pay-out partner.
+state TRANSACTION_COMPLETED #lightgreen : Remittance successful.
+state TRANSACTION_REVERSED: The transaction is reversed.
+state TRANSACTION_TIMEOUT #plum : call getTransaction to get current state
+state TRANSACTION_REJECTED #lightpink : The transaction is rejected.
+state TRANSACTION_ON_HOLD  #plum : The transaction is on-hold
+state REFUND_FAILED #lightpink : Refund failed.
+state REFUNDED #lightgreen : Refund successful.
+
+[*] -down[#blue]-> PAYMENT_VALIDATED : <color:blue>ML call Thunesto create transaction successfully
 [*] -> PAYMENT_VALIDATED_FAILED: In case of error while calling thunes or REJECTED by thunes[1]
 
 ' PREPAY_INITIATED -down-> PAYMENT_VALIDATED : Call Thunes Send Money Validate Success
 ' PREPAY_INITIATED -left->  PREPAY_FAILED : Call Thunes fail or validate request fail
 
-PAYMENT_VALIDATED -down-> PAYMENT_ACCEPTED: Call Telepin check AML list ok
+PAYMENT_VALIDATED -down[#blue]-> PAYMENT_ACCEPTED: <color:blue>Call Telepin check AML list ok
 PAYMENT_VALIDATED -left-> PAYMENT_AML_FAIL: Customer block on AML list
 
-PAYMENT_ACCEPTED -down-> PAYMENT_RESERVED : Call PAYMENT API on Telepin to debit customer
+PAYMENT_ACCEPTED -down[#blue]-> PAYMENT_RESERVED : <color:blue>Call PAYMENT API on Telepin to debit customer
 PAYMENT_ACCEPTED -left-> PAYMENT_RESERVED_FAILED : Call PAYMENT API on Telepin fail
 PAYMENT_ACCEPTED -down-> PAYMENT_TIMEOUT : Call PAYMENT API on Telepin timeout
 
@@ -44,7 +63,7 @@ PAYMENT_REFUND_REQUIRED -down-> REFUNDED: call Refund API  on Telepin success
 PAYMENT_REFUND_REQUIRED -down-> REFUND_FAILED: in case business fail: TBD ErrorCode,
 
 
-PAYMENT_RESERVED -down-> TRANSACTION_SUBMITTED: Call ConfirmTransaction API on Thunes success
+PAYMENT_RESERVED -down[#blue]-> TRANSACTION_SUBMITTED: <color:blue>Call ConfirmTransaction API on Thunes success
 PAYMENT_RESERVED -left-> PAYMENT_REFUND_REQUIRED : Call ConfirmTransaction API on Thunes fail
 PAYMENT_RESERVED -down-> TRANSACTION_TIMEOUT : Call ConfirmTransaction API on Thunes timeout
 TRANSACTION_TIMEOUT -down-> PAYMENT_REFUND_REQUIRED: not found/invalid state?
@@ -56,36 +75,30 @@ TRANSACTION_SUBMITTED -down-> TRANSACTION_SUBMITTED: Receive SUBMITTED event
 
 TRANSACTION_SUBMITTED -down-> TRANSACTION_ON_HOLD: Receive CONFIRMED-UNDER-REVIEW-SLS(20110) event
 TRANSACTION_SUBMITTED -down-> TRANSACTION_DECLINED: Receive DECLINED event
-TRANSACTION_SUBMITTED -down-> TRANSACTION_AVAILABLE: Receive AVAILABLE event
+TRANSACTION_SUBMITTED -down[#blue]-> TRANSACTION_AVAILABLE: Receive AVAILABLE event
 TRANSACTION_AVAILABLE -down-> TRANSACTION_REVERSED: Receive REVERSED event
-TRANSACTION_AVAILABLE -down-> TRANSACTION_COMPLETED: Receive COMPLETED event
-TRANSACTION_SUBMITTED -down-> TRANSACTION_COMPLETED: Receive COMPLETED event
+TRANSACTION_AVAILABLE -down[#blue]-> TRANSACTION_COMPLETED: Receive COMPLETED event
+TRANSACTION_SUBMITTED -down[#blue]-> TRANSACTION_COMPLETED: Receive COMPLETED event
 TRANSACTION_COMPLETED -down-> TRANSACTION_REVERSED: Receive REVERSED event
 
-REFUNDED --> [*]
-PAYMENT_AML_FAIL -left-> end1
-PAYMENT_RESERVED_FAILED -left-> end2
-REFUND_FAILED -left-> end3
-TRANSACTION_REVERSED -down-> end5
+'TRANSACTION_COMPLETED -right-> endHappy
 
-PAYMENT_VALIDATED: create Transaction on Thune
-PAYMENT_VALIDATED_FAILED: Txn not Created on Thunes
-PAYMENT_AML_FAIL : Customer was blocked.
-PAYMENT_ACCEPTED : User not block on AML
-PAYMENT_RESERVED: Reserved amount on customer wallet
-PAYMENT_TIMEOUT: call Telepin to inquiry transaction
-TRANSACTION_SUBMITTED: submitted to destination bank
-TRANSACTION_AVAILABLE: TBD
-TRANSACTION_DECLINED: The transaction is declined by the pay-out partner.
-TRANSACTION_COMPLETED : Remittance successful.
-TRANSACTION_REVERSED: The transaction is reversed.
-TRANSACTION_TIMEOUT: call getTransaction to get current state
-TRANSACTION_REJECTED: The transaction is rejected.
-TRANSACTION_ON_HOLD: The transaction is on-hold
-REFUNDED : Refund successful.
-REFUND_FAILED : Refund failed.
-PAYMENT_REFUND_REQUIRED: call Refund on Telepin
+
+PAYMENT_AML_FAIL -left-> end1
+PAYMENT_ERROR -up-> end2
+PAYMENT_RESERVED_FAILED -left-> end2
+REFUND_FAILED -down-> REFUNDED
+'TRANSACTION_REVERSED -down-> end5
+TRANSACTION_DECLINED -down[#blue]-> REFUNDED: <color:blue>added missing  03062024
+TRANSACTION_REVERSED -[#blue]-> REFUNDED: <color:blue>added missing  03062024
+
+TRANSACTION_CANCELLED -down[#blue]-> REFUNDED: <color:blue>added missing  03062024
+
+'PAYMENT_VALIDATED: create Transaction on Thune
+
 'in case Thunes refund success and Telepin fail then status is PAYMENT_REFUND_REQUIRED'
+REFUNDED --> [*]
+
 
 legend
 ***LEGEND***
