@@ -1,0 +1,41 @@
+@startmindmap
+'https://plantuml.com/mindmap-diagram
+
+
+*[#lightgreen] <&flag>Thanh
+** <&globe>Work
+*** Senior Software Engineer
+*** Career Path
+*** History
+
+
+** Personality
+*** Friendly
+*** Happy
+*** Hardworking
+
+** Hobbit
+*** Sport
+**** Swimming
+**** Running
+**** Badminton
+**** Other
+
+
+
+left side
+**[#lightblue] family
+*** parent
+****:parent in-law
+- father-in-law
+- mother-in-law;
+*** blood
+****:- 1 Sister Phuong Anh: Married + 3 kids
+- 1 Brother Tung Duong: Full-time study;
+*** married
+**** Wife: Xuan Nguyen
+**** No Kid ^^
+
+** friends
+
+@endmindmap

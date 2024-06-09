@@ -14,7 +14,7 @@ concise "Future Simple" as FS
 concise "Future Continuous" as FC
 concise "Future Perfect" as FP
 
-concise "GeneralKnowledge" as GK
+concise "generalknowledge" as GK
 
 
 @0
@@ -32,7 +32,12 @@ note top of PP:__Just__ = a short time ago \n__Already__ = sooner than expected 
 note top of P: only about past\nwe don't know current stuation
 note bottom of P: Past Simple
 
-note top of GK: <b><color:red>used to (do)</b> thói quen trong quá khứ, hiện tại không diễn ra\nđúng trong quá khứ nhưng không còn đúng trong hiện tại\n
+note top of GK
+<b><color:red><size:20>used to (do)
+- thói quen trong quá khứ, hiện tại không diễn ra
+- đúng trong quá khứ nhưng không còn đúng trong hiện tại
+- <b><color:red>would
+end note
 
 
 @250
