@@ -1,0 +1,18 @@
+@startmindmap
+'https://plantuml.com/mindmap-diagram
+
+caption Vocabulary
+title My super title
+
+* <&flag>Energy
+-- Negative
+** Positive
+*** <color:red>giving(v)</color> cho đi
+*** <color:red>giving(v)</color> cho đi
+*** <color:red>giving(v)</color> cho đi
+
+header
+Vocabulary header
+endheader
+
+@endmindmap

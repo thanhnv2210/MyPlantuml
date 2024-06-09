@@ -1,0 +1,85 @@
+@startuml
+autonumber
+skinparam maxMessageSize 300
+
+participant Customer as customer
+
+participant "App" as fronend
+participant "user backend" as user
+participant "core backend" as core
+participant db as db
+participant telepin as telepin
+
+customer -> fronend: login with username and password
+fronend-> user : call /api/auth/doMobileLogin API
+user -> core : call /api/telepin/doMobileLogin API
+
+alt priKey or accountId or password is empty
+core -> user: return failed
+user -> fronend: return failed
+fronend -> customer: return failed
+end
+
+core -> telepin: call /mremit-domestic/JSON-RPC
+telepin -> core: return user info
+
+alt telepin return info username is empty
+core -> telepin: call login.doLogout
+user -> fronend: return failed login
+fronend -> customer: return failed
+end
+
+core -> db: get user login faild times
+db -> core: return times
+
+alt user login failed times > 2
+core -> user: return failed login
+user -> fronend: return failed login
+fronend -> customer: return failed
+end
+
+core -> telepin: call login.doLogin
+telepin -> core: return login success or failure
+
+alt user login success
+core -> user: return failed login
+
+alt password length <6 or temporaryPassword is 1.0
+  core -> telepin: call /telepin to send otp
+  telepin -> core: return send otp success or failure
+  alt send otp faild
+   core -> user: return failed login
+   user -> fronend: return failed login
+   fronend -> customer: return failed
+  else send otp success
+   core -> user: return need change password
+   user -> fronend: return need change password
+   fronend -> customer: return need change password
+  end
+end
+
+core -> db : Update the user login record
+core -> db : Save current session ID into database
+
+core -> telepin: call method HelperFunctions.getMyUserInfo
+telepin -> core: return login user info
+
+alt User using a Outlet Counter or Taxi Driver id to login
+core -> user: return failed login
+user -> fronend: return failed login
+fronend -> customer: return failed
+end
+
+core -> telepin: call method HelperFunctions.getMyAllowedServices
+telepin -> core: return User Privilege
+core -> user: return userId and MerchantId
+user -> fronend: return userId and MerchantId
+fronend -> customer: return success
+
+else user login failed
+core -> db: save or update user login info
+core -> user: return failed
+fronend -> customer: return failed
+end
+
+@enduml

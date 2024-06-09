@@ -1,0 +1,96 @@
+@startuml
+skinparam State {
+  BackgroundColor yellow
+  FontColor GREEN
+  FontName Sanserif
+  FontSize 15
+  FontStyle bold
+'LineColor Red
+
+}
+
+<style>
+ arrow {
+  FontColor RED
+  FontName Sanserif
+  FontStyle bold
+    LineColor Red
+  }
+
+</style>
+
+state end1    <<end>>
+state end2    <<end>>
+state end3    <<end>>
+state end5    <<end>>
+[*] -down-> PAYMENT_VALIDATED : ML call Thunesto create transaction successfully
+[*] -> PAYMENT_VALIDATED_FAILED: In case of error while calling thunes or REJECTED by thunes[1]
+
+' PREPAY_INITIATED -down-> PAYMENT_VALIDATED : Call Thunes Send Money Validate Success
+' PREPAY_INITIATED -left->  PREPAY_FAILED : Call Thunes fail or validate request fail
+
+PAYMENT_VALIDATED -down-> PAYMENT_ACCEPTED: Call Telepin check AML list ok
+PAYMENT_VALIDATED -left-> PAYMENT_AML_FAIL: Customer block on AML list
+
+PAYMENT_ACCEPTED -down-> PAYMENT_RESERVED : Call PAYMENT API on Telepin to debit customer
+PAYMENT_ACCEPTED -left-> PAYMENT_RESERVED_FAILED : Call PAYMENT API on Telepin fail
+PAYMENT_ACCEPTED -down-> PAYMENT_TIMEOUT : Call PAYMENT API on Telepin timeout
+
+PAYMENT_TIMEOUT -up->PAYMENT_RESERVED_FAILED: not found transaction in Telepin
+PAYMENT_TIMEOUT -down->PAYMENT_REFUND_REQUIRED: found transaction in Telepin
+PAYMENT_TIMEOUT -left-> PAYMENT_ERROR
+
+PAYMENT_REFUND_REQUIRED -down-> REFUNDED: call Refund API  on Telepin success
+PAYMENT_REFUND_REQUIRED -down-> REFUND_FAILED: in case business fail: TBD ErrorCode,
+
+
+PAYMENT_RESERVED -down-> TRANSACTION_SUBMITTED: Call ConfirmTransaction API on Thunes success
+PAYMENT_RESERVED -left-> PAYMENT_REFUND_REQUIRED : Call ConfirmTransaction API on Thunes fail
+PAYMENT_RESERVED -down-> TRANSACTION_TIMEOUT : Call ConfirmTransaction API on Thunes timeout
+TRANSACTION_TIMEOUT -down-> PAYMENT_REFUND_REQUIRED: not found/invalid state?
+TRANSACTION_TIMEOUT -right-> TRANSACTION_SUBMITTED: found and status is CONFIRMED,SUBMITTED, AVAILABLE, COMPLETED, CONFIRMED-UNDER-REVIEW-SLS
+
+TRANSACTION_SUBMITTED -up-> TRANSACTION_REJECTED: Receive REJECTED event
+TRANSACTION_SUBMITTED -down-> TRANSACTION_CANCELLED: Receive CANCELLED event
+TRANSACTION_SUBMITTED -down-> TRANSACTION_SUBMITTED: Receive SUBMITTED event
+
+TRANSACTION_SUBMITTED -down-> TRANSACTION_ON_HOLD: Receive CONFIRMED-UNDER-REVIEW-SLS(20110) event
+TRANSACTION_SUBMITTED -down-> TRANSACTION_DECLINED: Receive DECLINED event
+TRANSACTION_SUBMITTED -down-> TRANSACTION_AVAILABLE: Receive AVAILABLE event
+TRANSACTION_AVAILABLE -down-> TRANSACTION_REVERSED: Receive REVERSED event
+TRANSACTION_AVAILABLE -down-> TRANSACTION_COMPLETED: Receive COMPLETED event
+TRANSACTION_SUBMITTED -down-> TRANSACTION_COMPLETED: Receive COMPLETED event
+TRANSACTION_COMPLETED -down-> TRANSACTION_REVERSED: Receive REVERSED event
+
+REFUNDED --> [*]
+PAYMENT_AML_FAIL -left-> end1
+PAYMENT_RESERVED_FAILED -left-> end2
+REFUND_FAILED -left-> end3
+TRANSACTION_REVERSED -down-> end5
+
+PAYMENT_VALIDATED: create Transaction on Thune
+PAYMENT_VALIDATED_FAILED: Txn not Created on Thunes
+PAYMENT_AML_FAIL : Customer was blocked.
+PAYMENT_ACCEPTED : User not block on AML
+PAYMENT_RESERVED: Reserved amount on customer wallet
+PAYMENT_TIMEOUT: call Telepin to inquiry transaction
+TRANSACTION_SUBMITTED: submitted to destination bank
+TRANSACTION_AVAILABLE: TBD
+TRANSACTION_DECLINED: The transaction is declined by the pay-out partner.
+TRANSACTION_COMPLETED : Remittance successful.
+TRANSACTION_REVERSED: The transaction is reversed.
+TRANSACTION_TIMEOUT: call getTransaction to get current state
+TRANSACTION_REJECTED: The transaction is rejected.
+TRANSACTION_ON_HOLD: The transaction is on-hold
+REFUNDED : Refund successful.
+REFUND_FAILED : Refund failed.
+PAYMENT_REFUND_REQUIRED: call Refund on Telepin
+'in case Thunes refund success and Telepin fail then status is PAYMENT_REFUND_REQUIRED'
+
+legend
+***LEGEND***
+->TRANSACTION_ON_HOLD once released will have the states after TRANSACTION_SUBMITTED
+->In case of AML call timeout, status will be PAYMENT_AML_FAIL with a error code
+->[1] Error wil happen in different scenarios, hence assumption the record was successfully created on DB, the status will be updated.
+end legend
+@enduml

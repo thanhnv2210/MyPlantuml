@@ -1,0 +1,15 @@
+@startuml
+'https://plantuml.com/state-diagram
+
+scale 350 width
+[*] --> NotShooting
+
+state state1
+state state2 #lightgreen
+state state3
+
+NotShooting -right-> state1 : <b><color:red>because of
+NotShooting -up-> state2
+NotShooting -left-> state3
+
+@enduml

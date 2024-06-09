@@ -1,0 +1,37 @@
+1) HUB_State_Machine(THUNES, NETSCLICK)
+How to add a new status on HUB's state machine:
+- Adapter update:
+	+) Add new status to HUB_STATUS
+	+) Add the new mapping for StatusMapper: internal(com.singtel.ml.remittance.model.TransactionStatus) <-> external
+	+) Add the new mapping for STATE_MACHINE for HUB
+
+
+2) ML_State_Machine: com.singtel.ml.remittance.model.TransactionStatus
+How to add a new status on ML state machine:
+- Remit Service update:
+	+) Step 1: get the existing status.
+	+) Step 2: Event
+		o Expected event: for example callback, or partner output response
+			- check partner STATE_MACHINE for eligible status and update.
+		o Unexpected event: Connection Issue, Response issue
+			- Handle case by case on each step on errorHandler.
+
+
+3) Current design:
+
+- Expected case for Telepin:
+*** Note: we only save the transaction in case submit successful
+	+) 1.TRANSACTION_SUCCESS
+
+- Expected case for Thunes:
+	+) 1.PAYMENT_VALIDATED
+	+) 2.PAYMENT_RESERVED	--> payment_reference_id (TelepinPaymentSoNumber)
+	+) 3.TRANSACTION_SUBMITTED	--> partner_transaction_id_submit, hub_transaction_id_submit, hub_transaction_id, salt
+	+) 4.TRANSACTION_COMPLETED
+
+
+4) Current problem:
+- Multiple submit:
+	+) in case the first request inprogress, the second request come and we have many scenario for the conflict between 2 request.
+
+

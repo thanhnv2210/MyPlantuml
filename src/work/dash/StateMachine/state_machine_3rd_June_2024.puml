@@ -19,31 +19,39 @@ skinparam State {
 
 </style>
 
-state end1    <<end>>
-state end2    <<end>>
+state endPrePayment    <<end>>
+'state end2    <<end>>
 'state end3    <<end>>
 'state end5    <<end>>
 'state endHappy    <<end>>
 state PAYMENT_VALIDATED #lightgreen : create Transaction on Thune
-state PAYMENT_VALIDATED_FAILED #lightpink : Txn not Created on Thunes
-state PAYMENT_AML_FAIL #lightpink : Customer was blocked.
+state PAYMENT_VALIDATED_FAILED #lightgreen : Txn not Created on Thunes\nNo DB saving
+state PAYMENT_AML_FAIL #orange : Customer was blocked.
 state PAYMENT_ACCEPTED #lightgreen : User not block on AML
 state PAYMENT_RESERVED #lightgreen : Reserved amount on customer wallet
+state PAYMENT_RESERVED_FAILED #orange : Call PAYMENT API on Telepin fail
 state PAYMENT_TIMEOUT #plum : call Telepin to inquiry transaction
+state PAYMENT_ERROR #orange : ???
 state PAYMENT_REFUND_REQUIRED #lightpink : call Refund on Telepin
-state TRANSACTION_SUBMITTED #lightgreen : submitted to destination bank
+state SUBMITTED {
+    state TRANSACTION_SUBMITTED #lightgreen : submitted to destination bank
+    state TRANSACTION_ON_HOLD  #lightgreen : The transaction is on-hold
+    TRANSACTION_SUBMITTED -down[#blue]-> TRANSACTION_ON_HOLD:<color:blue>CONFIRMED-UNDER-REVIEW-SLS(20110)
+}
+
 state TRANSACTION_AVAILABLE #plum : TBD
 state TRANSACTION_DECLINED #lightpink : The transaction is declined by the pay-out partner.
 state TRANSACTION_COMPLETED #lightgreen : Remittance successful.
-state TRANSACTION_REVERSED: The transaction is reversed.
+state TRANSACTION_REVERSED #lightpink: The transaction is reversed.
 state TRANSACTION_TIMEOUT #plum : call getTransaction to get current state
 state TRANSACTION_REJECTED #lightpink : The transaction is rejected.
-state TRANSACTION_ON_HOLD  #plum : The transaction is on-hold
+state TRANSACTION_CANCELLED #lightpink : ???
 state REFUND_FAILED #lightpink : Refund failed.
 state REFUNDED #lightgreen : Refund successful.
 
 [*] -down[#blue]-> PAYMENT_VALIDATED : <color:blue>ML call Thunesto create transaction successfully
-[*] -> PAYMENT_VALIDATED_FAILED: In case of error while calling thunes or REJECTED by thunes[1]
+[*] -left> PAYMENT_VALIDATED_FAILED: In case of error while calling thunes or REJECTED by thunes[1]
+PAYMENT_VALIDATED_FAILED --> endPrePayment
 
 ' PREPAY_INITIATED -down-> PAYMENT_VALIDATED : Call Thunes Send Money Validate Success
 ' PREPAY_INITIATED -left->  PREPAY_FAILED : Call Thunes fail or validate request fail
@@ -63,30 +71,30 @@ PAYMENT_REFUND_REQUIRED -down-> REFUNDED: call Refund API  on Telepin success
 PAYMENT_REFUND_REQUIRED -down-> REFUND_FAILED: in case business fail: TBD ErrorCode,
 
 
-PAYMENT_RESERVED -down[#blue]-> TRANSACTION_SUBMITTED: <color:blue>Call ConfirmTransaction API on Thunes success
+PAYMENT_RESERVED -down[#blue]-> SUBMITTED: <color:blue>Call ConfirmTransaction API on Thunes success
 PAYMENT_RESERVED -left-> PAYMENT_REFUND_REQUIRED : Call ConfirmTransaction API on Thunes fail
 PAYMENT_RESERVED -down-> TRANSACTION_TIMEOUT : Call ConfirmTransaction API on Thunes timeout
 TRANSACTION_TIMEOUT -down-> PAYMENT_REFUND_REQUIRED: not found/invalid state?
-TRANSACTION_TIMEOUT -right-> TRANSACTION_SUBMITTED: found and status is CONFIRMED,SUBMITTED, AVAILABLE, COMPLETED, CONFIRMED-UNDER-REVIEW-SLS
+TRANSACTION_TIMEOUT -right-> SUBMITTED: found and status is CONFIRMED,SUBMITTED, AVAILABLE, COMPLETED, CONFIRMED-UNDER-REVIEW-SLS
 
-TRANSACTION_SUBMITTED -up-> TRANSACTION_REJECTED: Receive REJECTED event
-TRANSACTION_SUBMITTED -down-> TRANSACTION_CANCELLED: Receive CANCELLED event
-TRANSACTION_SUBMITTED -down-> TRANSACTION_SUBMITTED: Receive SUBMITTED event
+SUBMITTED -up-> TRANSACTION_REJECTED: Receive REJECTED event
+SUBMITTED -down-> TRANSACTION_CANCELLED: Receive CANCELLED event
+SUBMITTED -down[#blue]-> SUBMITTED: <color:blue>Receive SUBMITTED event
 
-TRANSACTION_SUBMITTED -down-> TRANSACTION_ON_HOLD: Receive CONFIRMED-UNDER-REVIEW-SLS(20110) event
-TRANSACTION_SUBMITTED -down-> TRANSACTION_DECLINED: Receive DECLINED event
-TRANSACTION_SUBMITTED -down[#blue]-> TRANSACTION_AVAILABLE: Receive AVAILABLE event
+
+SUBMITTED -down-> TRANSACTION_DECLINED: Receive DECLINED event
+SUBMITTED -down[#blue]-> TRANSACTION_AVAILABLE: Receive AVAILABLE event
 TRANSACTION_AVAILABLE -down-> TRANSACTION_REVERSED: Receive REVERSED event
-TRANSACTION_AVAILABLE -down[#blue]-> TRANSACTION_COMPLETED: Receive COMPLETED event
-TRANSACTION_SUBMITTED -down[#blue]-> TRANSACTION_COMPLETED: Receive COMPLETED event
+TRANSACTION_AVAILABLE -down[#blue]-> TRANSACTION_COMPLETED: <color:blue>Receive COMPLETED event
+SUBMITTED -down[#blue]-> TRANSACTION_COMPLETED: <color:blue>Receive COMPLETED event
 TRANSACTION_COMPLETED -down-> TRANSACTION_REVERSED: Receive REVERSED event
 
 'TRANSACTION_COMPLETED -right-> endHappy
 
 
-PAYMENT_AML_FAIL -left-> end1
-PAYMENT_ERROR -up-> end2
-PAYMENT_RESERVED_FAILED -left-> end2
+PAYMENT_AML_FAIL -left-> endPrePayment
+PAYMENT_ERROR -up-> endPrePayment
+PAYMENT_RESERVED_FAILED -left-> endPrePayment
 REFUND_FAILED -down-> REFUNDED
 'TRANSACTION_REVERSED -down-> end5
 TRANSACTION_DECLINED -down[#blue]-> REFUNDED: <color:blue>added missing  03062024

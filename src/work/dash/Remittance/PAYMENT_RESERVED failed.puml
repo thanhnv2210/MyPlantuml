@@ -1,0 +1,75 @@
+@startuml
+
+concise "FirstRequest" as T1
+concise "SecondRequest" as T2
+
+@0
+note top of T1
+1399204_20240508_230134_7190
+end note
+T1 is "GetRequiredInformation"
+note bottom of T1
+- Bene Information(Customer Service)
+- CustomerExtensionData(Utility Service)
+- Service Detail(Product Service)
+end note
+
+@100
+T2 is "GetRequiredInformation"
+note top of T2
+1399204_20240508_230134_7830
+end note
+
+@200
+
+@300
+
+@400
+T1 is "AML Scan"
+@500
+T2 is "AML Scan"
+
+@700
+T1 is "Payment Successful"
+note bottom of T1
+Start: 2024-05-08 23:01:34.859
+End: 2024-05-08 23:01:46.628
+[Method : payment] [Executed In : 11769ms]
+end note
+@800
+T2 is "Payment Failed and DB Save"
+note bottom of T2
+Start: 2024-05-08 23:01:41.863
+End: 2024-05-08 23:01:42.045
+[Method : payment] [Executed In : 182ms]
+
+end note
+
+
+@1000
+note top of T2
+2024-05-08 23:01:43.378
+payment save entity PAYMENT_RESERVED_FAILED
+end note
+
+@1200
+T2 is {hidden}
+
+@1400
+T1 is "DB Save"
+note bottom of T1
+version conflict
+current status is PAYMENT_RESERVED
+end note
+
+@1600
+T1 is "handleConfirmException"
+note top of T1
+2024-05-08 23:01:49.249
+confirmTransaction save entity
+PAYMENT_RESERVED
+end note
+
+@2000
+T1 is {-}
+@enduml

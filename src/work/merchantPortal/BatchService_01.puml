@@ -1,0 +1,95 @@
+@startmindmap
++[#Orange] <&flag>BatchService
+++[#lightgreen] DashPortal
++++ ShengSiongSettlementBean
+++++ filePathConfig
+++++ remotePath
+++++ defaultDataLoadPreviousDay = 1
++++ Seven11SettlementBean
++++ FairPriceCheersSettlementBean
++++ FaveSettlementBean
++++ FoodRepublicSettlementBean
+
+++[#lightgreen] SCP
+***:<b><color:blue>uploadSFTPData -> changeFolderPermission
+CENTRALISED_SFTP_HOST_URL: sftp.dev.ml.dash.com.sg
+CENTRALISED_SFTP_HOST_PORT: 22
+CENTRALISED_SFTP_HOST_USERNAME: dashmpbatchusr
+CENTRALISED_SFTP_HOST_PASSWD:
+CENTRALISED_SFTP_HOST_KEYFILE:/home/ubuntu/.ssh/opensshdashmpbatchusr;
+
+++[#lightgreen] FTP
+***:<b><color:blue>downloadSFTPData
+FTP_HOST_URL: 202.40.237.148
+FTP_HOST_PORT: 22
+FTP_HOST_USERNAME: mportal
+FTP_HOST_PASSWD:
+FTP_HOST_KEYFILE: /home/ec2-user/batchjob/keys/merchant_portal_prod;
+
+++[#lightgreen] AWS
+***:<b><color:blue>AmazonSimpleEmailService, AmazonS3,
+AmazonSNSUtil,AmazonSNS;
+
+left side
+--[#lightgreen] BatchJob
+***:Scheduled
+- JobLauncher
+- Job + JobParameters
++ <b><color:red>uDay, impTime, timestamp
++ mName, incentive, indi, mParam
+- JobBuilderFactory
+- StepBuilderFactory
+- JobListener
+- Seven11SettlementBean, ...;
+****:CDR6HRJOB.TASK1.CRON
+CDR6HRJOB.TASK2.CRON
+CDR6HRJOB.TASK3.CRON
+CDR6HRJOB.TASK4.CRON
+
+CDRJOB.TASK1.CRON
+CDRJOB.TASK2.CRON
+
+COMFORTDATAJOB.TASK.CRON
+COMFORTFILEJOB.TASK.CRON
+
+DEFAULTMERCHANTSETTLEMENTJOB.TASK1.CRON
+DEFAULTMERCHANTSETTLEMENTJOB.TASK2.CRON
+DEFAULTMERCHANTSETTLEMENTJOB.TASK3.CRON
+
+DEFAULTTAXISETTLEMENTJOB.TASK.CRON
+
+FAIRPRICECHEERSSETTLEMENTJOB.TASK1.CRON
+FAIRPRICECHEERSSETTLEMENTJOB.TASK2.CRON
+
+FAVESETTLEMENTJOB.TASK.CRON
+
+FOODPUBLICSETTLEMENTJOB.TASK.CRON
+
+QFBPAYSETTLEMENTJOB.TASK.CRON
+
+SEVEN11SETTLEMENTJOB.TASK.CRON
+SEVEN11TRANSACTIONJOB.TASK.CRON
+
+<color:red>SHENGSIONGSETTLEMENTJOB.TASK.CRON
+
+SMRTCOMPANYINCENTIVEJOB.TASK.CRON
+SMRTDRIVERINFOJOB.TASK.CRON
+SMRTFILEJOB.TASK.CRON
+SMRTTRANSACTIONJOB.TASK.CRON
+
+NEWFAIRPRICECHEERSSETTLEMENTJOB.TASK1.CRON
+NEWFAIRPRICECHEERSSETTLEMENTJOB.TASK2.CRON
+
+CASHTOPUPJOB.TASK.CRON;
+
++[#Orange] <&flag>JobTask\n- @Scheduled
+** Job
+*** sSiongSettlementJob, ...
+***:name -> sSiongSettlementJob, ...
+incrementer -> ...
+start -> Step
+listener -> JobListener;
+** JobLauncher
+
+
+@endmindmap

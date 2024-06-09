@@ -1,0 +1,105 @@
+@startuml
+
+[logback] as lb
+[slf4j] as l4j
+[eclipselink] as el
+[httpclient] as hc
+[data-jpa] as dj
+[commons-lang] as cl
+[org.apache.tomcat:el-api, catalina] as tc
+[glassfish.javax.faces] as jf
+[net.sourceforge.javacsv:javacsv] as jcsv
+[net.sourceforge.jexcelapi:jxl] as jxl
+[net.sf.json-lib:json-lib] as jlib
+[com.itextpdf:itextpdf] as pdf
+[com.amazonaws:aws-java-sdk] as aws
+[commons-fileupload] as fileupload
+[commons-codec] as codec
+[commons-io] as io
+[commons-net] as net
+[com.oracle.database.jdbc] as jdbc
+[jstl:jstl] as jstl
+[net.tanesha.recaptcha4j:recaptcha4j] as recaptcha4j
+[org.quartz-scheduler:quartz] as quartz
+[org.quartz-scheduler:quartz-jobs] as qjobs
+[javax.transaction:jta] as jta
+'for extenstion
+[com.alibaba:fastjson] as fastjson
+
+[1.LogService] as LS #lightgreen
+[2.TelepinBean] as TB #lightgreen
+[3.TelepinWS] as TWS #lightgreen
+[4.CommonUtil] as CU #lightgreen
+[5.merchant-service-dao] as msd #lightgreen
+
+[6:com.inf:dash_portal] as dp #yellow
+[7.dash_coreservice] as dcs #lightblue
+[8.dash_usermanager] as dum #lightblue
+
+[9.batchjob] as batchjob #lightblue
+
+lb -> LS
+l4j --> LS
+
+el -> TB
+LS --> TB: ???
+TWS --> TB
+
+LS --> TWS
+hc -> TWS
+
+cl --> CU
+dj -> CU
+
+
+tc -> msd
+LS --> msd
+TB --> msd
+jf --> msd
+jcsv --> msd
+jxl --> msd
+jlib --> msd
+pdf --> msd
+aws --> msd
+msd <-- fileupload
+msd <-- codec
+msd <-- io
+msd <-- net
+msd <-- jdbc
+msd <-- jstl
+msd <-- recaptcha4j
+msd <-- quartz
+msd <-- qjobs
+msd <-- jta
+
+
+
+
+[many lib ...] as mlib #orange
+LS --> dp
+CU --> dp
+msd -> dp
+mlib --> dp
+dp -> dcs
+
+
+
+dp --> dum
+dum <-- fastjson
+
+LS --> batchjob
+TB --> batchjob
+msd --> batchjob
+
+
+[maven-compiler-plugin] as mcp
+[junit] as ju
+[xstream] as xs
+[checking...] as ck
+[lombok] as lbk
+
+mcp --> ck
+ck <-- ju
+ck -> xs
+ck --> lbk
+@enduml

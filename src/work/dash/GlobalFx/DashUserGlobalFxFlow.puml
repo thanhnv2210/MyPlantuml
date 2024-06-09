@@ -1,0 +1,127 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+actor "Dash User" as DU #green
+control "API Gateway" as AG
+actor "Batch Service" as BS #red
+control "Fx Service" as FS
+control "Product Service" as PS
+database "ML_Schema" as DB
+database "Service_Management" as SM
+control "Utility Service" as US
+participant TELEPIN #lightblue
+participant THUNES #lightgreen
+
+group #lightblue 1. Get global FX by cache
+DU -> AG: Get global FX Request\n<b><color:green>GET</b> /api/v1/fx/global \n--header '<b><color:red>__partner-id__</b>: dash'
+AG -[#green]> DU: Return Valid Cache\n<b><color:red>__1 hour__</b> by partner-id header\nalmost response by cache
+note over AG, DU
+{
+    "fromCurrency": "SGD",
+    "toCurrencyList": [
+        {
+            "toCurrency": "CNY",
+            "countryID": 56,
+            "fxRate": 4.724980000
+        },
+        ...
+    }
+}
+end note
+end
+
+group #lightyellow 2. Batch Job refresh GlobalFx <b><color:red>__every 30 minutes__
+BS -> AG: <b><color:green>GET</b>/api/v1/fx/global\nCache-Control: max-age=0
+AG -> FS: <b><color:green>GET</b> /api/v1/fx/global\nALB mapping to Fx Service
+FS -> DB ++ #blue: retrieveBrandIds for THUNES and TELEPIN
+note right
+<b>ml_enabled_brands
+end note
+DB -> FS --: - serviceId(THUNES)\n- brandId(TELEPIN)
+FS -> DB ++ #cyan: get latest FX Rate by serviceId or BrandId
+note right
+<b>ml_fx_rates
+end note
+DB -> FS --: FX Rate response
+note over FS, DB
+{
+    - toCurrency
+    - fromCurrency (SGD as default)
+    - countryID (All EURO country into 1)
+    - fxRate
+}
+end note
+FS -> AG: global FX for All country
+end
+
+group #plum 3. Refresh BrandIds and Synchronize Fx Rate
+BS -> FS: Refresh with GlobalFx\n- THUNES\n- TELEPIN
+note right
+<b><color:blue>POST</color> /api/v1/fx/internal/globafx/refresh?hubName={0}
+end note
+FS -> DB ++ #blue: retrieveBrandIdsByHub DASH,HIAPP \n- <b><color:red>__BeforeCurrentHour__: 4
+DB --> FS --: Return Available Service <b><color:red>(By Cache)
+note right
+<b>ml_enabled_brands
+end note
+
+group #lightgray Refresh BrandIds every 4 hours
+FS -> PS: - AvailableServicesByHub\n- GetServicesForGlobalFx\n- partnerId:DASH,HIAPP\n- hubName:THUNES,TELEPIN
+note right
+<b><color:green>GET</color> /api/v1/products/remit-service/external-partner
+<b>/globafx?partnerId={0}&hubName={1}
+end note
+
+PS -> SM ++ #gold:
+note left
+<b>getRemitServicesByExternalPartner
+end note
+note right
+<b>1. partner
+2. remit_service
+3. partner_globalfx_service
+??? status='ACTIVATE'
+end note
+SM -> PS --++: RemitServiceDetail\n-<b><color:red>__MarkupRate__</b>=MarkupRatePercentage<b><color:red>__/100__
+PS -> US --++: Get Information of Country list
+US -> DB --++:
+DB -> US --++: Country list Information
+US -> PS --: <b><color:red>__IsoCode__</b> by country
+
+loop For THUNES corridor
+PS -> SM --++:
+note right
+remit_corridor_reference
+end note
+SM -> PS --: <b><color:red>__PayerId__
+PS --> SM --++: if (FEATURES_GLOBALFX_TIERFEE==True)
+note right
+remit_service_tier_fee
+end note
+SM --> PS --: <b><color:red>__MarkupRate__</b>=min(MarkupRatePercentage)<b><color:red>__/100(*)__
+end
+
+PS --> FS: Return Available Service <b><color:red>(Updated)
+FS -> DB ++ #blue: <b><color:blue>Save ml_enabled_brands data
+note right
+<b>ml_enabled_brands
+- if empty Throw
+PRODUCT_SERVICE_TIER_FEE_NOT_FOUND
+end note
+DB --> FS --:
+end
+
+else Synchronize Fx rate
+FS -> TELEPIN ++ #lightblue: Get Fx Rate for TELEPIN service
+TELEPIN --> FS --:
+FS -> THUNES ++ #lightgreen: Get Fx Rate for THUNES service
+THUNES --> FS --:
+FS -> DB ++ #cyan: <b><color:blue>Save the latest FX rate
+DB --> FS --:
+'end
+
+FS -> BS:
+end
+@enduml

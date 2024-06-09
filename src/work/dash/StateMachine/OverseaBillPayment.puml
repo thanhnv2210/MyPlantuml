@@ -1,0 +1,92 @@
+@startuml
+skinparam State {
+  BackgroundColor yellow
+  FontColor GREEN
+  FontName Sanserif
+  FontSize 15
+  FontStyle bold
+'LineColor Red
+
+}
+
+<style>
+ arrow {
+  FontColor RED
+  FontName Sanserif
+  FontStyle bold
+    LineColor Red
+  }
+
+</style>
+title DTOne state Diagram
+state end1    <<end>>
+state end2    <<end>>
+state end3    <<end>>
+state end5    <<end>>
+
+'state PAYMENT_VALIDATED #magenta
+'state s1 : s1 description
+'state s2 #pink;line:red;line.bold;text:red : s2 description
+'state s3 #palegreen;line:green;line.dashed;text:green : s3 description
+'state s4 #aliceblue;line:blue;line.dotted;text:blue   : s4 description
+' start, choice, fork, join, end
+' For an example: state end5    <<end>>
+
+[*] -down-> PAYMENT_VALIDATED : ML call Partner create transaction successfully
+[*] -> PAYMENT_VALIDATED_FAILED: In case of error while calling partner or REJECTED by DTOne[1]
+
+
+PAYMENT_VALIDATED -down-> PAYMENT_VALIDATED_CANCELLED: User Cancelled Txn
+PAYMENT_VALIDATED -down-> PAYMENT_RESERVED : Call PAYMENT API on Telepin to debit customer
+PAYMENT_VALIDATED -right-> PAYMENT_VALIDATED_REJECTED : Retail amount mismatch with db cache
+PAYMENT_VALIDATED -left-> PAYMENT_RESERVED_FAILED : Call PAYMENT API on Telepin fail
+PAYMENT_VALIDATED -down-> PAYMENT_TIMEOUT : Call PAYMENT API on Telepin timeout
+
+PAYMENT_TIMEOUT -up->PAYMENT_RESERVED_FAILED: not found transaction in Telepin
+PAYMENT_TIMEOUT -down->PAYMENT_REFUND_REQUIRED: found transaction in Telepin
+PAYMENT_TIMEOUT -left-> PAYMENT_ERROR
+
+PAYMENT_REFUND_REQUIRED -down-> REFUNDED: call Refund API  on Telepin success
+PAYMENT_REFUND_REQUIRED -down-> REFUND_FAILED: in case business fail: TBD ErrorCode,
+
+
+PAYMENT_RESERVED -down-> TRANSACTION_SUBMITTED: Call ConfirmTransaction API on Partner success
+PAYMENT_RESERVED -left-> PAYMENT_REFUND_REQUIRED : Call ConfirmTransaction API on Partner fail
+PAYMENT_RESERVED -down-> TRANSACTION_TIMEOUT : Call ConfirmTransaction API on Partner timeout
+TRANSACTION_TIMEOUT -down-> PAYMENT_REFUND_REQUIRED: not found/invalid state?
+TRANSACTION_TIMEOUT -right-> TRANSACTION_SUBMITTED: found and status is CONFIRMED,SUBMITTED, AVAILABLE, COMPLETED
+
+TRANSACTION_SUBMITTED -down-> TRANSACTION_DECLINED: Receive DECLINED event
+TRANSACTION_SUBMITTED -down-> TRANSACTION_REJECTED: Receive REJECTED status in response
+TRANSACTION_SUBMITTED -down-> TRANSACTION_COMPLETED: Receive COMPLETED event
+TRANSACTION_COMPLETED -down-> TRANSACTION_REVERSED: Receive REVERSED event
+
+REFUNDED --> [*]
+PAYMENT_VALIDATED_FAILED -right-> end1
+PAYMENT_RESERVED_FAILED -left-> end2
+REFUND_FAILED -left-> end3
+TRANSACTION_REVERSED -down-> end5
+
+PAYMENT_VALIDATED: create Transaction on DTOne
+PAYMENT_VALIDATED_FAILED: Txn not Created on DTOne
+PAYMENT_VALIDATED_REJECTED: Txn amounnt mismatch
+PAYMENT_VALIDATED_CANCELLED: Txn Cancelled By User
+PAYMENT_ACCEPTED : Not used for DTOne
+PAYMENT_RESERVED: Reserved amount on customer wallet
+PAYMENT_TIMEOUT: call Telepin to inquiry transaction
+TRANSACTION_SUBMITTED: submitted to destination partner
+TRANSACTION_DECLINED: The transaction is declined by DTOne
+TRANSACTION_COMPLETED : Prepaid successful
+TRANSACTION_REVERSED: The transaction is reversed
+TRANSACTION_REJECTED: The transaction is rejected by DTOne
+TRANSACTION_TIMEOUT: call getTransaction to get current state
+REFUNDED : Refund successful
+REFUND_FAILED : Refund failed
+PAYMENT_REFUND_REQUIRED: call Refund on Telepin
+'in case Partner refund success and Telepin fail then status is PAYMENT_REFUND_REQUIRED'
+
+legend
+***LEGEND***
+->[1] Error will happen in different scenarios, hence assumption the record was successfully created on DB, the status will be updated.
+end legend
+@enduml

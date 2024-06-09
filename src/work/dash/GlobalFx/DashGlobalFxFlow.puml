@@ -1,0 +1,15 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+concise "Batch Service" as BS
+concise "FX Service" as FS
+concise "Product Service" as PS
+concise "API Gateway" as AG
+
+@0
+BS is "Refresh Global Fx"
+'${ML_API_GATEWAY_ENDPOINT}/api/v1/fx/global
+'/api/v1/fx/internal/globafx/refresh?hubName={0}
+
+
+@2000
+@enduml

@@ -1,0 +1,78 @@
+@startuml
+
+[parent]
+[dependency] #lightgreen
+[dependencies]
+[groupId]
+[artifactId]
+[version] #yellow
+[scope] #yellow
+[type] #yellow
+
+[project] #green
+[p_groupId]
+[p_artifactId]
+[p_name]
+[p_description]
+[p_properties]
+[p_version] #red
+[build] #orange
+[modules] #yellow
+[packaging]#yellow
+
+
+note as N1
+  <b>groupId, artifactId
+  <b><color:red>version
+  <b><color:gray>relativePath
+end note
+
+note as N2
+  to inject the version of other dependencies
+  <java.version> --> ${java.version}
+end note
+
+note as N3
+  <b><color:blue>Compile(Default)</b> propagated to the dependent projects ??? transitive
+  <b><color:blue>provided</b> dependencies that should be provided at runtime by JDK or a container. ??? not transitive
+  <b><color:blue>runtime</b> The dependencies with this scope are required at runtime ??? <b>JDBC driver is a good example
+  <b><color:blue>test</b> Test dependencies aren’t transitive and are only present for test and execution classpaths.
+  <b><color:blue>--system--</b> deprecated
+  <b><color:blue>import</b> It’s only available for the dependency <b><color:red>type</b> pom
+end note
+
+note as N4
+  <b><color:blue>direct</b>
+  <b><color:blue>transitive</b>
+end note
+
+note as N5
+  <b><color:blue>finalName, pluginManagement, plugins
+end note
+
+parent --> dependencies: 1 to n
+parent .. N1
+dependency <- dependencies: 1 to n
+dependency --> groupId
+dependency --> artifactId
+dependency --> version
+dependency --> scope
+dependency --> type
+scope .. N3
+
+project --> p_name
+project --> p_groupId
+project --> p_artifactId
+project --> p_description
+project --> p_properties
+project --> build
+build .. N5
+p_properties .. N2
+project --> p_version
+project -> dependency
+project -> dependencies
+project --> modules
+project --> packaging
+
+
+@enduml

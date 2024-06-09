@@ -1,0 +1,30 @@
+@startmindmap
+
++[#Orange] <&flag>Mono Error
+++[#lightgreen] 1.0.onErrorComplete
+***_ ??? Simply complete the sequence by replacing an onError signal with an __onComplete signal__
+***_ when:
++++[#Orange] onErrorComplete()
++++[#Orange] onErrorComplete(Class<? extends Throwable> type)
++++[#Orange] onErrorComplete(Predicate<? super Throwable> predicate)
+++[#lightgreen] 1.1.onErrorReturn
+***_ return a __static value__ in case have an exception
+***_ when:
+++[#lightgreen] 1.2.onErrorResume
+***_ Compute a __dynamic fallback value__ \n<b>return Mono.just
+***_ Execute an alternative path with a fallback method
+***_ Catch, wrap and re-throw an error, e.g., as a custom business exception \n<b><color:red>return Mono.error
+***_ when: <b><color:red>catch whole flow exception
+++[#lightgreen] 3.onErrorMap
+***_ return a default value in case have an exception
+
+++[#Orange] <&flag>Flux Error
++++[#lightgreen] 2.1.onErrorContinue
+****_ dropping the incriminating element from the sequence and <b>continuing with subsequent elements.
+'
+
+* <&flag>Question
+** fallback vs callback
+
+
+@endmindmap

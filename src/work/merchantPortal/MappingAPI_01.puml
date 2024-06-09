@@ -1,0 +1,29 @@
+@startmindmap
++[#Orange] <&flag>Controller
+++ DashPortal
++++[#lightgreen] CoreService
+++++ BalanceController
+++++ BaseController
+++++ CounterController
+++++ DictContoller
+++++ FileController
+++++_ HealthController
+++++ HomeController
+++++ MenuController
+++++ MerchantController
+++++ ReqController
+++++ TelepinSerivceController
+++++ TransactionController
+++++ UserController
++++[#lightgreen] UserManagement
+++++ AuthenticateController
+++++_ HealthController
+
+left side
+
+
+--[#lightgreen] BatchJob
+--- ManualController
+---_ HealthController
+
+@endmindmap

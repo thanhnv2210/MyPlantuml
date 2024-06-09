@@ -1,0 +1,19 @@
+@startmindmap
+
++[#Orange] <&flag>Transactional
+++[#lightgreen] Propagation type
+***:
+@Transactional(propagation = Propagation.SUPPORTS, readOnly = true);
+++[#lightgreen] Isolation level
+***:
+@Transactional(isolation = Isolation.SERIALIZABLE);
+++[#lightgreen] Timeout
+++[#lightgreen] readOnly
+++[#lightgreen] Rollback
+
++[#Orange] <&flag>Lock
+++[#lightgreen] Lock Mode
++++_ PESSIMISTIC_READ
++++_ PESSIMISTIC_WRITE: cho record duoc release de bat dau
+
+@endmindmap

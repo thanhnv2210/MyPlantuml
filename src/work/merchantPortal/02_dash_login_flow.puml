@@ -1,0 +1,81 @@
+@startuml
+autonumber
+skinparam maxMessageSize 300
+
+participant Merchant as merchant
+
+participant "Portal" as portal
+participant "User backend" as user
+participant "Core backend" as core
+participant DB as db
+participant Telepin as telepin
+
+merchant -> portal: login with username and password
+portal-> user : call /api/auth/doMobileLogin API
+user -> core : call /api/telepin/doMobileLogin API
+core -> core : Pass internal validations check
+core -> telepin: call /mremit-domestic/JSON-RPC
+telepin -> core: return user info
+
+alt If telepin return user info with username is empty
+	alt  Check failed counter
+		 core -> db : if failed counter > 2
+	     core -> user : account locked
+		 user -> portal : account locked
+		 portal -> merchant: return Locked Login
+	else Increment failed counter
+	core -> db : update failed counter +1
+	core -> user: return failed login
+	user -> portal: return failed login
+	portal -> merchant: return Invalid Login
+end
+
+core -> telepin: call login.doLogin
+telepin -> core: return login info
+
+alt Login failed
+core -> user: return failed login
+user -> portal: return failed login
+portal -> merchant: return Invalid Login
+
+alt Login success and  user info contains password length <6 or temporaryPassword = 1
+	core -> user: return need change password
+	user -> portal: return need change password
+	portal -> merchant: return need change password
+	merchant -> portal : enter new password
+	portal -> user : check new password validations
+	user -> core : new password
+	core -> telepin : send otp
+	merchant -> portal : enter otp
+	portal -> user : passthrough otp
+	user -> core : passthrough otp
+	core -> telepin : update user record
+end
+
+core -> db : Update the user login record
+core -> db : Save current session ID into database
+
+core -> telepin: call method HelperFunctions.getMyUserInfo
+telepin -> core: return login user info
+
+alt User using a Outlet Counter or Taxi Driver id to login
+core -> user: return failed login
+user -> portal: return failed login
+portal -> merchant: return failed
+end
+
+core -> telepin: call method HelperFunctions.getMyAllowedServices
+telepin -> core: return User Privilege
+core -> user: return userId and MerchantId
+user -> user: generate Token
+user -> portal: return user info and token
+portal -> merchant: return success
+
+else user login failed
+core -> db: save or update user login info
+core -> user: return failed
+user -> portal: return failed
+portal -> merchant: return failed
+end
+
+@enduml

@@ -1,0 +1,86 @@
+@startmindmap
+'https://plantuml.com/mindmap-diagram
+
+'caption Netsclick
+'title Netsclick title
+'GMT: Get Merchant Token
+'CFA: Check Fund Availability
+'
+
+* <&flag>Netsclick\n       API
+--[#lightblue] Request
+---_ <color:red><b>CommonHeader</color>
+---- >product_indicator(2)\n release_number(2)\n status(3)\n originator_code(1)\n responder_code(1)\n mti(4)\n nets_tag_1(16)
+---_ <color:red><b>        Body</color>\nCommonBody &\ntxn_specific_data
+----_ <color:red><b>CommonBody</color>
+----- >nets_tag_2(16)\n processing_code(6)\n trxn_amount(12)\n xmit_datetime(10)\n stan(6)\n trxn_time(6)\n trxn_date(4)\n entry_mode(3)\n condition_code(2)\n ret_ref_num(12)\n terminal_id(16)\n retailer_id(15)\n retailer_info(40)
+------ <b> (+)for Reversal only \n settlement_date \n response_code \n original_data_elements
+----_ <color:blue><b>txn_specific_data</color>
+-----_ <color:blue><b>1.GMT</color>
+------_ <color:red>01, 02</color>
+-----_ <color:blue>2.GMT Status</color>
+------_ <color:red>03</color>
+-----_ <color:blue>3.CFA Transaction</color>
+------_ <color:red>02, 03, [04], 05</color> \n [04] is merchant specific
+-----_ <color:blue>4.CFA Cancellation</color>
+'------_ <color:red>01, 02, 03, [04]</color>
+-----_ <color:blue>5.Purchase</color>
+'------_ <color:red>[01], 02, 03, [04], [05]</color>
+-----_ <color:blue>6.Purchase Reversal</color>
+'------_ <color:red>[01], 02, 03, [04], [05]</color>
+-----_ <color:blue>7.Refund</color>
+'------_ <color:red>[01], 02, 03, [04], [05]</color>
+-----_ <color:blue>8.Refund Reversal</color>
+'------_ <color:red>[01], 02, 03, [04], [05]</color>
+-----_ <color:blue>9.Merchandise Return</color>
+'------_ <color:red>[01], 02, 03, [04], [05]</color>
+-----_ <color:blue>10.Merchandise Return Reversal</color>
+'------_ <color:red>[01], 02, 03, [04], [05]</color>
+right side
+**[#lightgreen] Response
+***_ <color:red><b>CommonHeader*</color> \n =request.CommonHeader
+***_ <color:red><b>        Body</color> \n CommonBody &\n txn_specific_data
+****_ <color:red><b>CommonBody</color>
+*****:nets_tag_2(16)
+processing_code(6)
+trxn_amount(12)
+xmit_datetime(10)
+stan(6)
+trxn_time(6)
+trxn_date(4)
+settlement_date(4)
+entry_mode(3)
+ret_ref_num(12)
+approval_code(6)
+response_code(2)
+terminal_id(16)
+retailer_id(15) ;
+****_ <color:red><b>txn_specific_data</color>
+*****_ <color:blue><b>1.GMT</color>
+******_ <color:red>51</color>
+*****_ <color:blue>2.GMT Status</color>
+******_ <color:red>51</color>
+*****_ <color:blue>3.CFA Transaction</color>
+******_ <color:red>52, [53]</color> \n [53] is for transaction with transaction \n amount exceed NETS Host/Issuer CVM limit
+*****_ <color:blue>4.CFA Cancellation</color>
+******_ <color:red>52</color>
+*****_ <color:blue>5.Purchase</color>
+******_ <color:red>52, [53]</color>
+*****_ <color:blue>6.Purchase Reversal</color>
+'******_ --
+*****_ <color:blue>7.Refund</color>
+******_ <color:red>52</color>
+*****_ <color:blue>8.Refund Reversal</color>
+'******_ --
+*****_ <color:blue>9.Merchandise Return</color>
+******_ <color:red>52</color>
+*****_ <color:blue>10.Merchandise Return Reversal</color>
+'******_ --
+
+header
+Netsclick
+<color:red><b>GMT</color>: Get Merchant Token
+<color:red><b>CFA</color>: Check Fund Availability
+endheader
+
+@endmindmap

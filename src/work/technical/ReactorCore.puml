@@ -1,0 +1,32 @@
+@startmindmap
+
++[#Orange] <&flag>Reactor Core
+**[#lightgreen] Known Java
+***_ Stream,
+**[#lightgreen] Known Reactor Core
+
+
+left side
+**[#plum] Unknown Java Core
+*** Future, CompletableFuture
+**[#plum] Unknown Reactor Core
+*** Publisher-Subscriber
+
+* <&flag>Question
+** .publishOn(UiUtils.uiThreadScheduler())
+*** Target: process data in the UI thread.
+** .subscribe(uiList::show, UiUtils::errorPopup)
+*** Target: trigger flow ...
+** <color:red>.__timeout__(Duration.ofMillis(800))
+
+right side
+* Issue Cases
+** Blocking vs Non Blocking
+** JVM asynchronous programming:
+*** Callbacks: example __EventListener__
+*** Futures:
+
+
+
+
+@endmindmap

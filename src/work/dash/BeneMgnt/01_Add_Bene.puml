@@ -1,0 +1,90 @@
+@startuml
+
+title Add Beneficiary
+skinparam backgroundColor #EEEBDC
+skinparam sequenceMessageAlign direction
+skinparam sequence  {
+LifeLineBorderColor blue
+sequenceArrowThickness 2
+sequenceMessageAlign direction
+}
+
+participant MobileApp #lightblue
+participant DashAppServer #lightblue
+participant CustomerService #lightgreen
+Database ML_DB as DB #gray
+participant Telepin_Json as Telepin #orange
+
+MobileApp -> DashAppServer: POST addBeneficiaryForMremit /'/v2/payment/mremit/addBeneficiaryForMremit'/
+DashAppServer -> CustomerService: POST /api/v1/customers/bene
+
+group doCustomerLogin
+CustomerService -> Telepin_Xml: sendRequestWithAuth\n(authorization-TelepinId)
+activate CustomerService
+activate Telepin_Xml
+CustomerService <- Telepin_Xml: GetMyAccountInfoReply\n(msisdn|telepinId|email|...)
+deactivate CustomerService
+deactivate Telepin_Xml
+
+CustomerService --[#Red]> DashAppServer: loginFailed(500|2008)
+CustomerService -> DB: CounterValidation
+CustomerService --[#Red]> DashAppServer: Reach Limit Monthly(400|2072) or Yearly(400|2071)
+CustomerService -> Telepin: Login
+activate CustomerService
+activate Telepin
+CustomerService <- Telepin: JSESSIONID
+deactivate CustomerService
+deactivate Telepin
+CustomerService --[#Red]> DashAppServer: loginFailed(500|2209)
+
+end
+
+CustomerService -> Telepin_Xml: Verify OTP
+CustomerService --[#Red]> DashAppServer: VALIDATE_TAC_INVALID_ERROR(400|2016)
+CustomerService -> DB: Remove Bene List
+
+group Verify Pending Beneficiary
+
+group have MSISDN not stay in PENDING status
+CustomerService --[#Red]> DashAppServer: BENE_MSISDN_ALREADY_EXISTED(400|2069)\nUNDEFINED_BENE_FLAG(500|2068)
+end
+
+group have PENDING MSISDN
+CustomerService -> Telepin: list Beneficiary
+CustomerService -> DB: ? MSISDN exist \nYES(update beneId) : \nNO(update new request data)
+CustomerService -[#Green]> DashAppServer: MSISDN exist - YES\nBENE_MSISDN_PARTNER_CREATED(400|2070)
+end
+
+group new MSISDN
+CustomerService -> DB: saveBeneHandleException(PENDING status)
+CustomerService --[#Red]> DashAppServer: CUSTOMER_GENERIC_DB_ERROR(500|2067)
+end
+
+end
+
+CustomerService -> Telepin: UploadFile
+activate CustomerService
+activate Telepin
+CustomerService <- Telepin: FileName
+deactivate CustomerService
+deactivate Telepin
+
+CustomerService --[#Red]> DashAppServer: TELEPIN_UPLOAD_FILE_ERROR(500|2207)
+
+CustomerService -> Telepin: addBeneficiaryCall
+activate CustomerService
+activate Telepin
+CustomerService <- Telepin: Beneficiary ID
+deactivate CustomerService
+deactivate Telepin
+
+CustomerService --[#Red]> DashAppServer: TELEPIN_TIMEOUT_EXCEPTION(408|2408)\nTELEPIN_GENERIC_EXCEPTION(500|2200) \nOther Error
+
+CustomerService -> DB: update flag to ADD with BeneId
+CustomerService -> DB: update counter
+CustomerService -> CustomerService: Send Email
+CustomerService -> Telepin: Logout
+CustomerService -[#Green]> DashAppServer: return response
+MobileApp <- DashAppServer: return response\nor mapping error code
+
+@enduml

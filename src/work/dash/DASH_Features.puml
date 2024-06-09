@@ -1,0 +1,62 @@
+@startmindmap
+'caption figure 1
+title DASH FEATURES
+
+* <&flag>FEATURES
+
+
+**[#lightgreen] 2.Customer
+*** 2.1 Get Bene List
+**** <color:green>GET /api/v1/customers/bene
+*** 2.2 Add Bene
+**** <color:blue>POST /api/v1/customers/bene
+*** 2.3 Bene Detail
+**** <color:green>GET /api/v1/customers/bene/{beneId}
+*** 2.4 Update Bene
+**** <color:purple>PUT /api/v1/customers/bene
+*** 2.5 Delete Bene
+**** <color:blue>POST /api/v1/customers/bene/remove \n???method <color:red>DELETE
+*** 2.6 Remittance History
+**** <color:green>GET /api/v1/customers/transactions
+***_ Check Wallet Balance
+***_ Check Account Validity
+***_ Get Account Detail
+***_ Check Bene Suspension
+***_ Verify Bene
+
+** 3.Product
+
+
+**[#lightgreen] 6.fx
+*** GlobalFx
+**** <color:green>GET /api/v1/fx/global
+*** CustomerFx
+**** <color:blue>POST /api/v1/fx
+*** CustomerFx TieFee
+**** <color:blue>POST /api/v2/fx
+**[#lightgreen] 7.Remittance
+
+
+left side
+**[#lightgreen] 1.OAuth
+*** Login
+*** Login with OTP
+***_ request OTP
+***_ Verify OTP
+***_ Get Public Key
+***_ Change PIN
+***[#lightgreen] 1.1.Iam
+
+**[#lightgreen] 4.Registration
+**[#lightgreen] 5.Utility
+
+header
+Thanh Nguyen
+endheader
+
+'center footer My super footer
+
+legend right
+  thanh.nguyen@singtel.com
+endlegend
+@endmindmap

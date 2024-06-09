@@ -1,0 +1,27 @@
+@startmindmap
+
++[#Orange] <&flag>Types
+--[#lightblue] 1.1.Function Interface
+---[#lightblue] Apply: fn.<b><color:red>__apply__</b>(string)
+---[#lightblue] @FunctionalInterface =
+---[#lightblue] 1.0.Lambda Expression \nInstantiate(Khởi tạo) Function Interface
+---- public interface Function<T, R> { … } \n<b><color:red>__Function<String, String>__ Foo;\nFoo foo = <b><color:red>parameter -> parameter + " from Foo";
+'Function<String, String> quote = s -> "'" + s + "'";
+--- compose: combine several functions into one \nand execute them sequentially
+
+++[#lightgreen] 1.__Supplier__
+***_ <b>No input with an output: <b><color:red>() -> return_sth
+++[#lightgreen] 2.__Consumer__
+***_ <b>Any input without an output: <b><color:red> any -> do_sth and no_return
+***_ example: __List.forEach__ method implements the __Consumer__ functional interface
++++[#lightgreen] 2.1 __BiConsumer__
+****_ have two inputs:
+++[#lightgreen] 3.__Predicate__
+***_ <b>return <color:red>boolean(true|false)
+***_ example: <b><color:red>Predicate<String></b> predicate1 =  str -> str.startsWith("A");
+***_ Combining Predicates <b><color:red>and|or|negative</b>: predicate1.and(predicate2.negative())
+***_ combining a Collection of Predicates: ... ???
+
+
+
+@endmindmap
