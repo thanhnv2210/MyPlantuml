@@ -6,7 +6,10 @@ skinparam State {
   FontSize 15
   FontStyle bold
 'LineColor Red
-
+  BackgroundColor<<HAPPY>> lightgreen
+  BackgroundColor<<PRE_PAYMENT>> orange
+  BackgroundColor<<CHECKING>> plum
+  BackgroundColor<<UNHAPPY>> lightpink
 }
 
 <style>
@@ -24,30 +27,31 @@ state endPrePayment    <<end>>
 'state end3    <<end>>
 'state end5    <<end>>
 'state endHappy    <<end>>
-state PAYMENT_VALIDATED #lightgreen : create Transaction on Thune
-state PAYMENT_VALIDATED_FAILED #lightgreen : Txn not Created on Thunes\nNo DB saving
-state PAYMENT_AML_FAIL #orange : Customer was blocked.
-state PAYMENT_ACCEPTED #lightgreen : User not block on AML
-state PAYMENT_RESERVED #lightgreen : Reserved amount on customer wallet
-state PAYMENT_RESERVED_FAILED #orange : Call PAYMENT API on Telepin fail
-state PAYMENT_TIMEOUT #plum : call Telepin to inquiry transaction
-state PAYMENT_ERROR #orange : ???
-state PAYMENT_REFUND_REQUIRED #lightpink : call Refund on Telepin
-state SUBMITTED {
-    state TRANSACTION_SUBMITTED #lightgreen : submitted to destination bank
-    state TRANSACTION_ON_HOLD  #lightgreen : The transaction is on-hold
+state PAYMENT_VALIDATED <<HAPPY>> : create Transaction on Thune
+state PAYMENT_VALIDATED_FAILED <<NEW>> : test
+'state PAYMENT_VALIDATED_FAILED #lightgreen : Txn not Created on Thunes\nNo DB saving
+state PAYMENT_AML_FAIL <<PRE_PAYMENT>> : Customer was blocked.
+state PAYMENT_ACCEPTED <<HAPPY>> : User not block on AML
+state PAYMENT_RESERVED <<HAPPY>> : Reserved amount on customer wallet
+state PAYMENT_RESERVED_FAILED <<PRE_PAYMENT>> : Call PAYMENT API on Telepin fail
+state PAYMENT_TIMEOUT <<CHECKING>> : call Telepin to inquiry transaction
+state PAYMENT_ERROR <<PRE_PAYMENT>> : ???
+state PAYMENT_REFUND_REQUIRED <<UNHAPPY>> : call Refund on Telepin
+state SUBMITTED <<HAPPY>> {
+    state TRANSACTION_SUBMITTED <<HAPPY>> : submitted to destination bank
+    state TRANSACTION_ON_HOLD  <<HAPPY>> : The transaction is on-hold
     TRANSACTION_SUBMITTED -down[#blue]-> TRANSACTION_ON_HOLD:<color:blue>CONFIRMED-UNDER-REVIEW-SLS(20110)
 }
 
-state TRANSACTION_AVAILABLE #plum : TBD
-state TRANSACTION_DECLINED #lightpink : The transaction is declined by the pay-out partner.
-state TRANSACTION_COMPLETED #lightgreen : Remittance successful.
-state TRANSACTION_REVERSED #lightpink: The transaction is reversed.
-state TRANSACTION_TIMEOUT #plum : call getTransaction to get current state
-state TRANSACTION_REJECTED #lightpink : The transaction is rejected.
-state TRANSACTION_CANCELLED #lightpink : ???
-state REFUND_FAILED #lightpink : Refund failed.
-state REFUNDED #lightgreen : Refund successful.
+state TRANSACTION_AVAILABLE <<CHECKING>> : TBD
+state TRANSACTION_DECLINED <<UNHAPPY>> : The transaction is declined by the pay-out partner.
+state TRANSACTION_COMPLETED <<HAPPY>> : Remittance successful.
+state TRANSACTION_REVERSED <<UNHAPPY>>: The transaction is reversed.
+state TRANSACTION_TIMEOUT <<CHECKING>> : call getTransaction to get current state
+state TRANSACTION_REJECTED <<UNHAPPY>> : The transaction is rejected.
+state TRANSACTION_CANCELLED <<UNHAPPY>> : ???
+state REFUND_FAILED <<UNHAPPY>> : Refund failed.
+state REFUNDED <<HAPPY>> : Refund successful.
 
 [*] -down[#blue]-> PAYMENT_VALIDATED : <color:blue>ML call Thunesto create transaction successfully
 [*] -left> PAYMENT_VALIDATED_FAILED: In case of error while calling thunes or REJECTED by thunes[1]
