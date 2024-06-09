@@ -1,0 +1,56 @@
+@startmindmap
+'https://canadadotnet.files.wordpress.com/2020/05/english-grammar-in-use-intermediate.pdf
+
+'caption figure 1
+'title My super title
+'() -> explain
+'[] -> optional
+
+*[#orange] <&flag>Sentence
+**[#lightgreen] By meaning
+***[#pink] Advice/suggestion
+****_ I'd(had) [not] better do ...
+****_ should ...
+****_ It's time to ...
+
+**[#lightgreen] By tenses
+*** Past
+*** Present
+*** Future
+
+**[#lightgreen] By ????
+*** Active
+*** Passive
+
+**[#lightgreen] By ????
+*** Negative
+*** Question
+****:- Request: can you ... could you ...
+- Permission: can I ... could I ... May I ...
+do you mind if I ... Is it OK if I ...
+- Offers: can I ...
+- Invitations: Would you like ...
+answer -> I'd like ...;
+
+**[#lightgreen] By ????
+*** Fact
+*** imagine
+****_ would[not]...: think of sth that is <b><color:red>__not real__
+****_ would (do): sth should do but can't do at <b><color:red>__present__
+****_ would have (done): sth that didn't happen in the <b><color:red>__past__
+*** Wish
+****_ If I knew ... I wish I knew
+
+left side
+** Condition + tenses
+*** Present: If I do
+*** <b><color:red>__Possible__</b> + Present: if + Present, ... <b><color:red>will<b> ...
+*** Past: If I did
+*** <b><color:red>__Possible__</b> + Past: if + Past, ... <b><color:red>would<b> ...
+*** <b><color:red>__will not happen | don't expect that it will happen__</b> if + past
+
+** ???
+*** Formal
+*** Informal --unformal--
+
+@endmindmap

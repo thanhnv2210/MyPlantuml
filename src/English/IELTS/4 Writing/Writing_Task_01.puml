@@ -1,0 +1,98 @@
+@startmindmap
+
+caption Writing Task 1
+title Writing Task 1
+
+skinparam {
+    wrapWidth 350
+    wrapWidth<<Structure>> 400
+}
+
+* explain
+'** - [] -> optional \n- () ->
+
+*[#yellow] <&flag>Writing
+**[#lightgreen] Types
+*** 1.Chart
+**** Static (Bar __chart__ or __graph__)
+***** will focus on <b><color:red>__compare__</b> (+detail)
+**** <b><color:red>Dynamic (line, table or pie)
+***** Target: will focus on <b><color:red>__trend__ (+compare +detail)
+*****:Grammar
+--Time--
+- <b><color:red>from ... to ...
+--Data--
+- increase|decrease + <b><color:red>from ... to ... | by/of ...
+- fluctuate + <b><color:red>between ... and ... | around ...
+--Sentences--
+- <b><color:red>S + V + [data] + (time)
+<-> <b><color:red>There is a/an + ADJ + N + [data] + in S + (time)
+<-> <b><color:red>S + witnessed|experienced|saw + a/an ADJ + N +[data] + (time)
+;
+
+
+*** 2.Map
+*** 3.Diagram | Process
+
+** Sentences
+*** Compare
+****: Grammar
+--With time--
+Special for Pie Chart
+- S1 + stood at + [data], ... + as much as that of S2
+;
+
+** Structure <<Structure>>
+***:--<b><color:blue>1.Introduction--
+o <b><color:orange>__Paraphrase__
+o introduce the content of graph ...
+-<b>Graph Name(__line,bar__), What, Where, When, Tense(<b><color:red>Simple Past</b>,Simple present...),
+<b><color:red>__Category__/ˈkæt__ə__ɡəri/, Me__a__surement/ˈmeʒəmənt/
+- shows/illustrates/compares ...
+'
+--<b><color:blue>2.Overview--
+o <b><color:orange>Trend + highlight
+- <b>Overall, It is clear that ... witnessed ...
+- while the opposite was true for ..., on the other hand,
+- <b>Additionally, during most of the period</b> ...
+- <b>It is also <color:red>e--n--vident/ˈ__e__vɪdənt/</color> that</b> ...
+- an Upward/a Downward Trend/Remained
+- <b>[Highlight] + was seen/recorded in + [Category]
+'
+--<b><color:blue>3.Detail group 1--
+- Common, similar <b><color:plum>(__Same trend, highlight__)
+- highest, lowest,
+- In the following ... years, ...
+'
+--<b><color:blue>4.Detail group 2--
+- Special, different <b><color:plum>(__Remain__)
+- In contrast, ;
+
+* Vocabulary
+**:--<b><color:blue>Verb--
+- raise, increase, grow, go up
+- decline, go down, drop, fall
+<b><color:red>decrea__se__ /dɪˈkriːs/ --discrease--
+- fluctuate,
+- remain __unchanged__|stable|constant at
+stabili__z__e|stabili__s__e at,
+<b><color:red>wi--s--tness|see/ˈwɪtnəs/ + no change|a stability/stəˈbɪləti/
+--<b><color:blue>Adv--
+- slowly, slightly
+- <b><color:red>considerably, significantly
+- Rapidly, stee--d--__p__ly /stiːp/
+- <b><color:red>substantially /səbˈstænʃəli/
+--<b><color:blue>Noun--
+- fluctuation
+- peak, reach a high of...
+- bottom, hit a low of...
+- increment, growth, ;
+**:General
+- brainsto<b><color:red>__r__m /ˈbreɪnstɔːm/
+- spending vs <b><color:red>expenditure/ɪkˈ__s__pendɪtʃər/noun[U]
+- comprehensive practice
+- outline vs layout
+-
+;
+
+@endmindmap

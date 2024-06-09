@@ -1,0 +1,156 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+concise "Past" as P
+concise "Past Perfect" as PaP
+concise "Past Perfect Continuous" as PaPC
+concise "Time" as T
+concise "Present" as G
+concise "Present Continuous" as PC
+concise "Present Perfect Continuous" as PPC
+concise "Present Perfect" as PP
+concise "Time" as T2
+concise "Future Simple" as FS
+concise "Future Continuous" as FC
+concise "Future Perfect" as FP
+
+concise "generalknowledge" as GK
+
+
+@0
+T is Timeline
+T2 is Timeline
+G is "<color:blue>I do"
+
+@50
+P is "I did"
+note top of GK: <b><color:red>have __and__ have got</b>
+
+@200
+T -> P:\n\n<b><color:red>I Started doing
+note top of PP:__Just__ = a short time ago \n__Already__ = sooner than expected \n__Yet__ = until now.
+note top of P: only about past\nwe don't know current stuation
+note bottom of P: Past Simple
+
+note top of GK
+<b><color:red><size:20>used to (do)
+- thói quen trong quá khứ, hiện tại không diễn ra
+- đúng trong quá khứ nhưng không còn đúng trong hiện tại
+- <b><color:red>would
+end note
+
+
+@250
+PaPC is "I had been doing"
+PaP is "I had done"
+note bottom of PaPC:<b><color:red>Activities(doing)\n<b><color:red>running,waiting,playing,raining...\nActivity __had done__\nbefore a __simple past__
+note bottom of PaP: <b><color:red>Event(done)\n<b><color:red>left,gone,seen,finished,broken,...\nActivity __had done__\nbefore a __simple past__
+
+@300
+'I_Was_Doing
+P is "I was doing"
+
+
+@400
+T -> P:\n\n<b><color:red>I was doing
+note bottom of P: Past Continuous
+
+
+@500
+'P is P_Simple
+PaP is {-}
+PaPC is {-}
+
+
+@600
+T -> P:\n\n<b><color:red>I finished doing
+T -> PaP:<b><color:red>Past Simple
+T -> PaPC:<b><color:red>Past Simple
+P is "I did"
+PaP is {hidden}
+PaPC is {hidden}
+note bottom of P: Past Simple
+note top of P:yesterday, last year\nten minutes ago\n<b><color:red>when, what time ...?
+
+@650
+note top of PP: recently \nin the last few days \nso far \n__since__ I arrived
+PP is "Present Perfect"
+PPC is "I have been doing"
+note bottom of PP: We don't know start time\nwe know the current situation
+
+@700
+
+
+@800
+P is {hidden}
+PC is "I am doing"
+
+
+
+@1000
+T -> P:<b><color:blue>Now
+T -> G:<b><color:blue>Now
+T -> PC:<b><color:blue>Now
+T -> PPC:<b><color:blue>Now
+T -> PP:<b><color:blue>Now\n
+T2 -> FS:<b><color:blue>Now
+T2 -> FC:<b><color:blue>Now
+'G is Present_Continuous
+PPC is {hidden}
+PP is "continuous...|Unfinished "
+note top of PP: the situation now\n<b><color:red>How long ...?
+
+note bottom of G:- timetables and programmers: <b><color:red>Transport or cinema times\n- I have (got) <b><color:red>appoi__n__tment, lessons, exams ... next ...
+
+note bottom of FS
+just before you start to do it
+- <b><color:red>go/come/leave...
+end note
+@1200
+PC is {hidden}
+
+@1250
+FP is "I will have done"
+
+note bottom of FS
+<b><color:red>shall I ...? shall we ...?
+- to ask if it's OK to do sth
+end note
+
+@1350
+FC is "I will be doing"
+
+@1500
+T2 -> FS:<b><color:blue>Future(next monday, next...)\n
+T2 -> FC:<b><color:blue>Future(next monday, next...)
+FS is "??? I'm going to do| I will"
+FP is {hidden}
+note bottom of FS
+<b><color:red>I am doing</b>: __decided<b><color:red>(fixed)</b> and arranged__
+<b><color:red>I am going to do</b>: decided to do it<b><color:red>__(intend to do it)__</b> and (will arrange or maybe not)
+- forecast that something will happen<b><color:red>/ˈhæpən/
+<b><color:red>(*) I was going to do</b>: I intended to do it, but I didn't do it.
+
+<b><color:red>I will</b>
+- we've __just decided__ to do sth
+- we __announce__ our decision
+- offering/agreeing/promis--<b><color:red>e</b>--ing to do sth
+- probably|I'm sure|I (don't) think|I wonder
+end note
+
+note top of GK
+<b><color:red>while/before/after/as soon as/until</b>
+- + I do(prefer)
+- + I have done:
+<b><color:red>if vs when
+- if: <color:red>__possibly__</color> happen
+- when: <color:red>__sure__</color> to happen
+end note
+
+@1750
+FC is {hidden}
+
+
+@2000
+G is {-}
+@enduml
