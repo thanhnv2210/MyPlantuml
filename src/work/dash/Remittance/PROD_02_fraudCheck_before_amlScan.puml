@@ -1,0 +1,151 @@
+@startuml
+
+concise "FirstRequest" as T1
+concise "SecondRequest" as T2
+
+@0
+note top of T1
+RemittanceControllerV2
+- 70d075d1-ba1a-44aa-ab6c-1c373d0f4b20
+- 47526_20240603_085336_3600
+- 2024-06-03T00:53:36.880
+end note
+T1 is "GetRequiredInformation"
+note bottom of T1
+- Bene Information(Customer Service)
+- CustomerExtensionData(Utility Service)
+- Service Detail(Product Service)
+end note
+
+@50
+
+@200
+
+@300
+
+@400
+@500
+'T2 is "AML Scan"
+
+@350
+T1 is "FraudCheck"
+note top of T1
+TransactionEntity
+- PAYMENT_VALIDATED (no change)
+- v1
+end note
+
+note bottom of T1
+[Method : fraudCheck] [Executed In : 1566ms]
+- Start: 024-06-03T00:53:36.968
+- End: 2024-06-03T00:53:38.535
+end note
+
+@700
+T1 is "AML Scan"
+note bottom of T1
+[Method : amlScan] [Executed In : 1124ms]
+- Start: 2024-06-03T00:53:38.535
+- End: 2024-06-03T00:53:39.658
+<color:red>????? should move before FraudCheck
+check status:
+<color:red>PAYMENT_VALIDATED && PAYMENT_ACCEPTED
+end note
+
+note top of T1
+TransactionEntity
+- PAYMENT_ACCEPTED
+- v2
+end note
+
+@1050
+T1 is "Payment Successful"
+note bottom of T1
+[Method : payment] [Executed In : 273ms]
+Start: 2024-06-03T00:53:41.080
+End: 2024-06-03T00:53:41.352
+end note
+
+note top of T1
+TransactionEntity
+- PAYMENT_RESERVED
+- v3
+end note
+
+@1200
+T2 is {hidden}
+
+@1400
+T1 is "THUNES Confirm"
+note bottom of T1
+- Start: 2024-06-03T00:53:42.420
+- End: 2024-06-03T00:53:43.357
+'version conflict
+'current status is PAYMENT_RESERVED
++ ThunesClient
+[Method : confirmTransaction] [Executed In : 938ms]
++ SubmitRemittanceThunes
+[Method : confirmTransaction] [Executed In : 2005ms]
+end note
+
+@1450
+T2 is "GetRequiredInformation"
+note top of T2
+RemittanceControllerV2
+- a7e0abc0-455f-4ddc-b71f-8d6ed6b55006
+- 47526_20240603_085336_3600
+- 2024-06-03T00:53:42.970
+end note
+
+
+
+@1800
+T2 is "FraudCheck"
+note bottom of T2
+Start: 2024-06-03T00:53:43.070
+End: 2024-06-03T00:53:44.523
+[Method : fraudCheck] [Executed In : 1453ms]
+end note
+
+
+@1900
+note top of T2
+TransactionEntity
+2024-06-03T00:53:43.293
+- PAYMENT_RESERVED (no change)
+- <color:red>v3 -> v4(***) Successful
+end note
+
+
+@2100
+T1 is "DB Saving"
+note top of T1
+TransactionEntity
+2024-06-03T00:53:43.357
+- <color:red>PAYMENT_RESERVED -> TRANSACTION_SUBMITTED
+- <color:red>v3 -> v4(***) Exception
+end note
+
+
+
+@2150
+T2 is {hidden}
+note top of T2
+[Method : amlScan]
+- Start: 2024-06-03T00:53:44.523
+<color:red>????? should move before FraudCheck
+check status:
+<color:red>PAYMENT_VALIDATED && PAYMENT_ACCEPTED
+- Exception: 2024-06-03T00:53:44.523
+end note
+
+@2200
+T1 is {hidden}
+note bottom of T1
+- Exception: 2024-06-03T00:53:44.526
+<color:red>saving to DB Failed to update table [transaction];
+<color:red>Version does not match for row with Id [3429734]
+end note
+
+@2500
+@enduml
