@@ -21,12 +21,10 @@ skinparam State {
   }
 
 </style>
+title ML State machine with THUNES
+
 
 state endPrePayment    <<end>>
-'state end2    <<end>>
-'state end3    <<end>>
-'state end5    <<end>>
-'state endHappy    <<end>>
 state PAYMENT_VALIDATED <<HAPPY>> : create Transaction on Thune
 state PAYMENT_VALIDATED_FAILED <<NEW>> : test
 'state PAYMENT_VALIDATED_FAILED #lightgreen : Txn not Created on Thunes\nNo DB saving
@@ -50,8 +48,11 @@ state TRANSACTION_REVERSED <<UNHAPPY>>: The transaction is reversed.
 state TRANSACTION_TIMEOUT <<CHECKING>> : call getTransaction to get current state
 state TRANSACTION_REJECTED <<UNHAPPY>> : The transaction is rejected.
 state TRANSACTION_CANCELLED <<UNHAPPY>> : ???
-state REFUND_FAILED <<UNHAPPY>> : Refund failed.
-state REFUNDED <<HAPPY>> : Refund successful.
+state "REFUND GROUP" as REFUNDED <<HAPPY>> {
+    state REFUND_FAILED #plum;line:green;line.dashed;text:green : in case business fail: TBD ErrorCode,
+    state REFUNDED_SUCCESS <<HAPPY>>: Refund successful.
+    REFUND_FAILED -[dashed]-> REFUNDED_SUCCESS
+}
 
 [*] -down[#blue]-> PAYMENT_VALIDATED : <color:blue>ML call Thunesto create transaction successfully
 [*] -left> PAYMENT_VALIDATED_FAILED: In case of error while calling thunes or REJECTED by thunes[1]
@@ -72,8 +73,6 @@ PAYMENT_TIMEOUT -down->PAYMENT_REFUND_REQUIRED: found transaction in Telepin
 PAYMENT_TIMEOUT -left-> PAYMENT_ERROR
 
 PAYMENT_REFUND_REQUIRED -down-> REFUNDED: call Refund API  on Telepin success
-PAYMENT_REFUND_REQUIRED -down-> REFUND_FAILED: in case business fail: TBD ErrorCode,
-
 
 PAYMENT_RESERVED -down[#blue]-> SUBMITTED: <color:blue>Call ConfirmTransaction API on Thunes success
 PAYMENT_RESERVED -left-> PAYMENT_REFUND_REQUIRED : Call ConfirmTransaction API on Thunes fail
@@ -81,7 +80,8 @@ PAYMENT_RESERVED -down-> TRANSACTION_TIMEOUT : Call ConfirmTransaction API on Th
 TRANSACTION_TIMEOUT -down-> PAYMENT_REFUND_REQUIRED: not found/invalid state?
 TRANSACTION_TIMEOUT -right-> SUBMITTED: found and status is CONFIRMED,SUBMITTED, AVAILABLE, COMPLETED, CONFIRMED-UNDER-REVIEW-SLS
 
-SUBMITTED -up-> TRANSACTION_REJECTED: Receive REJECTED event
+PAYMENT_RESERVED -[#plum]> TRANSACTION_REJECTED: <color:plum>REJECTED when create the transaction
+SUBMITTED -down-> TRANSACTION_REJECTED: Receive REJECTED event
 SUBMITTED -down-> TRANSACTION_CANCELLED: Receive CANCELLED event
 SUBMITTED -down[#blue]-> SUBMITTED: <color:blue>Receive SUBMITTED event
 
@@ -99,11 +99,9 @@ TRANSACTION_COMPLETED -down-> TRANSACTION_REVERSED: Receive REVERSED event
 PAYMENT_AML_FAIL -left-> endPrePayment
 PAYMENT_ERROR -up-> endPrePayment
 PAYMENT_RESERVED_FAILED -left-> endPrePayment
-REFUND_FAILED -down-> REFUNDED
-'TRANSACTION_REVERSED -down-> end5
 TRANSACTION_DECLINED -down[#blue]-> REFUNDED: <color:blue>added missing  03062024
 TRANSACTION_REVERSED -[#blue]-> REFUNDED: <color:blue>added missing  03062024
-
+TRANSACTION_REJECTED --> REFUNDED: <color:blue>added missing  03062024
 TRANSACTION_CANCELLED -down[#blue]-> REFUNDED: <color:blue>added missing  03062024
 
 'PAYMENT_VALIDATED: create Transaction on Thune
