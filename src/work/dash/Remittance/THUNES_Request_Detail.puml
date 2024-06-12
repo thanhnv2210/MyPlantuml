@@ -1,0 +1,84 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+'concise ngắn gọn
+actor "User" as U #blue
+control "Remittance Service" as RS #green
+control "Product Service" as PS
+control "Telepin" as TE #lightblue
+control "Customer Service" as CS
+control "Fx Service" as FS
+participant "Thunes Adapter" as TA
+control "Thunes Partner" as TP
+
+U -> RS: CHECK remit
+note over U,RS
+Header
+- authorization
+- partnerId
+- correlationId
+{
+}
+end note
+
+RS <- CS: Get <b><color:red>__issuerId__</color> by <color:green>__beneId,authorization__
+
+RS <- PS: Get <b><color:red>__Service Detail__</color> by <color:green>__serviceId,issuerId,partnerId__
+
+group Get Required information
+    'activate RS
+    RS -> TE: Get customer Info by token\n- <b><color:red>?GET_BENEFICIARY_INFO_FAIL
+else
+    RS -> CS: Get Bene Info by beneId\n- <b><color:red>?DASH_USER_IN_GREY_LIST
+else
+    RS -> FS: Get Quotation by Service Detail\n - <b><color:red>?HUB_REMITTANCE_FAIL
+end
+
+RS -> RS
+note left
+- senderMsisdn(<b><color:red>customerMsisdn</b>)
+- correlationId
+- callbackUrl
+- product{
+    - localCurrency
+    - foreignCountryIsoCode(<b><color:red>recipientCountryCode</b>)
+    - foreignCurrency
+    - serviceType
+}
+- fx{
+    - retailRate
+    - hubFee
+    - feeCurrency
+}
+end note
+note right
+info.sender {
+- customerId(<b><color:red>customerAccountId</b>)
+- dob(<b><color:red>customerDob</b>), countryOfBirth(<b><color:red>customerCountryOfBirth</b>)
+- postalCode(<b><color:red>customerPostCode</b>), countryOfResidence(<b><color:red>customerCountryOfResidence</b>),
+- primaryIdType(<b><color:red>customerPrimaryIdType</b>), primaryId(<b><color:red>customerPrimaryId</b>)
+- {UnitNumber HouseNumber StreetAddress}(<b><color:red>customerStreetAddress</b>)
+- fullName, email, nationality, idExpiry, occupation, sourceOfFunds, gender
+}
+info.beneficiary {
+- senderFirstName(<b><color:red>customerLastName</b>), senderLastName (<b><color:red>customerFirstName</b>)
+- firstName(<b><color:red>recipientFirstName</b>), lastName(<b><color:red>recipientLastName</b>), fullName(<b><color:red>recipientFullname</b>)
+- dob(<b><color:red>recipientDob</b>), beneAddress(<b><color:red>recipientAddress</b>), postalCode(<b><color:red>recipientPostCode</b>),
+- cityName(<b><color:red>recipientCity</b>), provinceName(<b><color:red>recipientProvince</b>)
+- benemsisdn(<b><color:red>recipientMsisdn</b>), remitPurposeName(<b><color:red>recipientRemitPurpose</b>)
+- beneBankAcctNo(<b><color:red>recipientBankAccountNumber</b>), branchCode(<b><color:red>recipientBranchCode</b>)
+- <b><color:orange>birthPlaceIsoCode(<b><color:red>recipientBirthPlaceCode</b>),
+- <b><color:orange>nationalityIsoCode(<b><color:red>recipientNationalityCode</b>),
+- bankAccTypeFlag, beneId, gender,  jobName, issuerName, custRelationship
+}
+end note
+
+RS -> TA
+note left
+- txnRequest
+- mapGender, iso8601Converter,
+- relationshipConverter, sourceOfFundConverter
+- purposeOfRemittanceConverter, idTypeConverter
+end note
+
+@enduml
