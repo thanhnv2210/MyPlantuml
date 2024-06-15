@@ -1,0 +1,67 @@
+@startmindmap
+<style>
+element {
+  MaximumWidth 400
+}
+mindmapDiagram {
+  .highlight {
+    BackgroundColor lightgreen
+  }
+  .uncertain {
+    BackgroundColor plum
+  }
+}
+</style>
+
+*[#orange] <&flag>Complex Grammatical Structures
+left side
+** 1.Complex Sentences <<highlight>>
+***_ Definition: Sentences that contain one independent clause and at least one dependent (subordinate) clause.
+***_ Example: "Although it was raining, we went for a walk."
+
+** 2.Compound-Complex Sentences
+***_ Definition: Sentences that have at least two independent clauses and at least one dependent clause.
+***_ Example: "She went to the store because she needed milk, and she bought some bread as well."
+
+** 3.Relative Clauses <<highlight>>
+***_ Definition: Clauses that provide additional information about a noun using relative pronouns (who, whom, whose, which, that).
+***_ Example: "The book that I borrowed was fascinating."
+
+** 4.Noun Clauses <<highlight>>
+***_ Definition: Clauses that function as a noun within the main sentence.
+***_ Example: "What he said was surprising."
+
+** 5.Adverbial Clauses <<uncertain>>
+***_ Definition: Clauses that function as adverbs, providing information about when, why, how, or under what conditions something happened.
+***_ Example: "She sings beautifully because she practices every day."
+
+** 6.Conditional Clauses <<highlight>>
+***_ Definition: Clauses that express a condition and its possible result. Often introduced by "if" or "unless."
+***_ Example: "If it rains, we will stay inside."
+
+right side
+** 7.Participial Phrases
+***_ Definition: Phrases that begin with a present or past participle and provide additional information about a noun.
+***_ Example: "Running late, she hurried to the bus stop."
+
+** 8.Gerund Phrases
+***_ Definition: Phrases that begin with a gerund (a verb ending in -ing that functions as a noun) and act as a noun in the sentence.
+***_ Example: "Swimming in the ocean is fun."
+
+** 9.Infinitive Phrases
+***_ Definition: Phrases that begin with an infinitive (to + base form of the verb) and function as nouns, adjectives, or adverbs.
+***_ Example: "To win the game is their goal."
+
+** 10.Appositive Phrases <<uncertain>>
+***_ Definition: Nouns or noun phrases that rename or provide additional information about another noun.
+***_ Example: "My friend, a talented musician, is performing tonight."
+
+** 11.Prepositional Phrases <<highlight>>
+***_ Definition: Phrases that begin with a preposition and end with a noun or pronoun, providing information about time, place, direction, etc.
+***_ Example: "She sat on the chair."
+
+** 12.Absolute Phrases
+***_ Definition: Phrases that provide additional information about the entire sentence, often consisting of a noun and a participle.
+***_ Example: "Weather permitting, we will go hiking."
+
+@endmindmap

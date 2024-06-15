@@ -1,0 +1,35 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+actor "Mobile App\nWeb App" as App
+actor "Power BI" as BI
+control "Service \n Python, JS, Java ..." as S
+control "Connector Oracle" as C1
+control "Connector My SQL" as C2
+control "Connector Postgres" as C3
+
+database "Oracle DB 1" as DB1
+database "My SQL DB 2" as DB2
+database "Postgres DB 3" as DB3
+
+database "Data Ware House\nOracle/MySql/Postgres" as DW
+
+App -> S ++:
+S ->  C1 --++:
+C1 -> DB1 --++:
+DB1 -> C1 --++:
+C1 -> S --++:
+S -> App --:
+
+BI -> C1 --++: SQL (Structured Query Language)
+C1 -> DB1 --++:
+DB1 -> C1 --++:
+C1 -> BI --++: Save and cache result
+
+DB1 <-> DW : Push/pull data
+DB2 <-> DW : Push/pull data
+DB3 <-> DW : Push/pull data
+BI <-> DW : working on only 1 DB to join related tables
+@enduml
