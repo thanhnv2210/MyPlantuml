@@ -8,21 +8,25 @@ skinparam {
     wrapWidth<<Structure>> 400
 }
 
-* explain
+'* explain
 '** - [] -> optional \n- () ->
 
 *[#yellow] <&flag>Writing
-**[#lightgreen] Types
-*** 1.Chart
+**[#lightgreen] 1.Types
+*** 1.1.Chart
 **** Static (Bar __chart__ or __graph__)
 ***** will focus on <b><color:red>__compare__</b> (+detail)
 **** <b><color:red>Dynamic (line, table or pie)
-***** Target: will focus on <b><color:red>__trend__ (+compare +detail)
+*****:Target: will focus on <b><color:red>__trend__ (+compare +detail)
+- Start point -> End point: Trend
+- Start + period: Detail
+- S1 vs S2: compare;
 *****:Grammar
 --Time--
 - <b><color:red>from ... to ...
 --Data--
 - increase|decrease + <b><color:red>from ... to ... | by/of ...
+<b><color:red>(*) by/of diễn tả __mức__ tăng giảm
 - fluctuate + <b><color:red>between ... and ... | around ...
 --Sentences--
 - <b><color:red>S + V + [data] + (time)
@@ -31,36 +35,58 @@ skinparam {
 ;
 
 
-*** 2.Map
-*** 3.Diagram | Process
+*** 1.2.Map
+'*** 1.3.Diagram \n Process
 
-** Sentences
-*** Compare
+** 2.Sentences
+*** 2.1.Compare
 ****: Grammar
 --With time--
 Special for Pie Chart
-- S1 + stood at + [data], ... + as much as that of S2
+- <b><color:red>S1 + stood at + [data], ... + as much as that of S2
 ;
 
-** Structure <<Structure>>
+
+
+*** 2.2.Detail
+****:--F1--
+- <b><color:red>S + V(trend) + ADV + [data] + (time)
+- <b><color:red>There be + a/an + ADJ + N-trend + in + S
+- <b><color:red>S witnessed/saw/experience__d__ + a/an + ADJ + N-trend
+--1 S + 3 Time--
+o start & __min or max__ & end
+(1) <b><color:red>Before/After + V-ing/N + (time), S + V + ADV
+ex: After reaching a peak at XXXX in YYYY, ...
+(2) <b><color:red>S + V, but later|then + (it) + V
+[Data] + (time) can add to give more detail
+(3) There be + a/an ADJ + N, <b><color:red>__followed by__</b> + a/an + ADJ + N
+(4) Despite + a/an + ADJ + N, <b><color:red>__this figure__</b> + V + ADV/ADJ
+;
+
+
+
+
+** 3.Structure
 ***:--<b><color:blue>1.Introduction--
 o <b><color:orange>__Paraphrase__
-o introduce the content of graph ...
--<b>Graph Name(__line,bar__), What, Where, When, Tense(<b><color:red>Simple Past</b>,Simple present...),
-<b><color:red>__Category__/ˈkæt__ə__ɡəri/, Me__a__surement/ˈmeʒəmənt/
-- shows/illustrates/compares ...
+-<b><color:red>1.Graph Name</color>(__line,bar__),<color:red> 2.What, 3.Where, 4.When, 5.Tense</color>(Simple Present),
+<b><color:red>__6.Category__/ˈkæt__ə__ɡəri/,7.Me__a__surement/ˈmeʒəmənt/
+
+(verbs) <b><color:red>shows/illustrates/compares/ gives information about ...
 '
 --<b><color:blue>2.Overview--
 o <b><color:orange>Trend + highlight
 - <b>Overall, It is clear that ... witnessed ...
-- while the opposite was true for ..., on the other hand,
-- <b>Additionally, during most of the period</b> ...
+- while the <b><color:red>opposite/ˈɒpəzɪt/</b> was true for ..., on the other hand,
+- <b>Additionally, during most of the period</b> ..., at the end of the period
+- <b><color:red>Furthermore/ˌfɜːðəˈmɔːr/
 - <b>It is also <color:red>e--n--vident/ˈ__e__vɪdənt/</color> that</b> ...
 - an Upward/a Downward Trend/Remained
 - <b>[Highlight] + was seen/recorded in + [Category]
 '
 --<b><color:blue>3.Detail group 1--
-- Common, similar <b><color:plum>(__Same trend, highlight__)
+- <b><color:plum>(__Same trend, highlight__)
+- Similarly, However, In contrast,
 - highest, lowest,
 - In the following ... years, ...
 '
@@ -68,31 +94,66 @@ o <b><color:orange>Trend + highlight
 - Special, different <b><color:plum>(__Remain__)
 - In contrast, ;
 
-* Vocabulary
+
+
+
+
+
+left side
+'* Vocabulary
 **:--<b><color:blue>Verb--
-- raise, increase, grow, go up
-- decline, go down, drop, fall
-<b><color:red>decrea__se__ /dɪˈkriːs/ --discrease--
+- raise(v,n), increase(v,n), grow, go up
+-  go down, drop, fall
+<b><color:red>decline(v,n), decrea__se__(v,n) /dɪˈkriːs/ --discrease--
 - fluctuate,
 - remain __unchanged__|stable|constant at
 stabili__z__e|stabili__s__e at,
 <b><color:red>wi--s--tness|see/ˈwɪtnəs/ + no change|a stability/stəˈbɪləti/
+
+-<b><color:red>outnumber(v) (đông hơn)
+vs -> surpass(v) (vượt qua)
+vs -> overtake/ˌəʊvəˈteɪk/(v)(vượt qua) -> overtaken(P2)
+
 --<b><color:blue>Adv--
 - slowly, slightly
-- <b><color:red>considerably, significantly
-- Rapidly, stee--d--__p__ly /stiːp/
-- <b><color:red>substantially /səbˈstænʃəli/
+- <b><color:red>considerably, significantly, dramatically, substantially /səbˈstænʃəli/
+- steep/stiːp/(adj,v)dốc -> <b><color:red>stee--d--__p__ly ~ Rapidly
+- steady/ˈstedi/(adj,v)đều đặn -> <b><color:red>steadily
+- <b><color:red>
+
+
+--<b><color:blue>ADJ--
+- considerable, significant
+- <b><color:red>gradual/ˈɡrædʒuəl/</b>: dần dần ~ steady
+- <b><color:red>moderate/ˈmɒdərət/</b> vừa phải
+
 --<b><color:blue>Noun--
 - fluctuation
 - peak, reach a high of...
 - bottom, hit a low of...
-- increment, growth, ;
+- increment, growth,
+--Linking Words--
+- It's clear that ..., It is notable that ..., the opposite was true for ...
+- __over__ a/the periods of XX years ..., __over__ the following XX years, __through__ the periods
+- After that, then, since then, Additionally, In additional,
+;
 **:General
 - brainsto<b><color:red>__r__m /ˈbreɪnstɔːm/
-- spending vs <b><color:red>expenditure/ɪkˈ__s__pendɪtʃər/noun[U]
+- spending vs expense vs <b><color:red>expenditure/ɪkˈ__s__pendɪtʃər/noun[U]
 - comprehensive practice
 - outline vs layout
--
+- --e--<b><color:red>__a__verage/ˈævərɪdʒ/
+- onward<b><color:red>__s__</b>(adv,adj): trở đi
+ex: From the years xxxx onwards, ...
+- residential phone services
 ;
+
+** tenses
+*** Present Simple
+**** For 1.Introduction + 2.Overview(Trend)
+*** Past Simple
+**** For Detail in the past
+*** Linking word,
+
 
 @endmindmap

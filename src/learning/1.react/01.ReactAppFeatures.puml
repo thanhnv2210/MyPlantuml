@@ -1,0 +1,86 @@
+@startmindmap
+<style>
+element {
+  MaximumWidth 400
+}
+mindmapDiagram {
+  .highlight {
+    BackgroundColor lightgreen
+  }
+  .uncertain {
+    BackgroundColor plum
+  }
+}
+</style>
+
+* Hooks
+** Side Effects & Lifecycle
+*** componentDidMount
+**** useEffect(()=>{ ... }, [ ]) <<highlight>>
+**** after first render only
+*** componentDidUpdate
+**** useEffect(()=>{... }, [dependency1, dependency2]) <<highlight>>
+**** after first render AND subsequent renders caused by a change in a dependency
+*** componentWillUnmount
+**** useEffect(() => { ... return ()=> {...cleanup}}) <<highlight>>
+*** shouldComponentUpdate
+**** no comparable hook, instead, wrap function component in React.memo(List)
+**** renders only if a prop changes
+*** componentWillMount
+**** deprecated so no comparable hook
+*** componentWillUpdate
+**** deprecated so no comparable hook
+
+* File
+** ts
+*** 1.class <<highlight>>
+****:- constructor
+- data type
+- default value;
+** tsx
+*** 2.function <<highlight>>
+**** props <<highlight>>
+**** state (useState hook) <<highlight>>
+**** handle lifecycle events (useEffect hook) <<uncertain>>
+**** reuse stateful logic with Custom Hooks
+***** Custom Hook <<uncertain>>
+** Function vs Class components <<highlight>>
+***:--1.Function--
+useState
+useEffect
+useRef
+--2.Class--
+this.setState
+Lifecycle Methods (componentDidMount)
+createRef;
+
+** tsconfig.json
+*** compilerOptions.baseUrl: src
+
+
+* React
+** App
+*** single-page React application <<highlight>>
+** libraries
+*** prop-types <<uncertain>>
+
+** tool
+*** ES7+ React/Redux/React-Native snippets
+*** React Developer Tools
+**** components
+**** profiler
+** Code Organization
+***:- File Structure
+- Naming Convention
+- Folder Structure
+- Ways to structure React App
+- Code Convention;
+
+** issue
+*** div vs Fragment
+
+* Vocabulary
+**:<b><color:red>pure/pjʊər/: nguyên chất --> sum(a,b)
+<b><color:red>impure/ɪmˈpjʊər/: not pure, but mixed with other substances --> withdraw(account, amount)
+<b><color:red>interchangeable: có thể hoán đổi cho nhau;
+@endmindmap
