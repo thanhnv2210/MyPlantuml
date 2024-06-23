@@ -1,0 +1,84 @@
+@startmindmap
+<style>
+element {
+  MaximumWidth 400
+}
+mindmapDiagram {
+  .highlight {
+    BackgroundColor lightgreen
+  }
+  .uncertain {
+    BackgroundColor plum
+  }
+  .frequently {
+    BackgroundColor gold
+  }
+  .rarely {
+    BackgroundColor lightgray
+  }
+}
+</style>
+
+*[#Orange] <&flag>Ways to shorten\n English sentences
+
+'left side
+** 1.<b><color:red>__Eliminate__</b> Redundant Words
+***_ Before: "In my personal opinion, I think that the project was very successful."
+***_ After: "I think the project was successful."
+
+** 2.Remove Unnecessary Adjectives and Adverbs
+***_ Before: "She __quickly and__ efficiently completed the __extremely__ difficult task."
+***_ After: "She efficiently completed the difficult task."
+
+** 3.Use Active Voice (vs passive voice)
+***_ Before: "The report was written by the team."
+***_ After: "The team wrote the report."
+
+** 4.Combine Sentences <<frequently>>
+***_ Before: "She likes to read books. She likes to read magazines as well."
+***_ After: "She likes to read books and magazines."
+
+** 5.Use Simple, Direct Language <<rarely>>
+***_ Before: "__Due to the fact that__ we were late, we missed __the beginning of the movie.__"
+***_ After: "Because we were late, we missed the movie's beginning."
+
+** 6.Avoid Unnecessary Prepositional Phrases
+***_ Before: "The book on the table __belongs to__ Sarah."
+***_ After: "The book on the table is Sarah's."
+
+** 7.Replace Phrases with Single Words
+***_ Before: "__At this point in time__, we cannot approve your request."
+***_ After: "Currently, we cannot approve your request."
+
+** 8.Use Pronouns When Appropriate
+***_ Before: "John said __that John__ would help with the project."
+***_ After: "John said he would help with the project."
+
+** 9.Remove <b><color:red>__Filler__</b> Words
+***_ Before "__It is important to note that__ the meeting will start at 9 AM."
+***_ After: "The meeting will start at 9 AM."
+
+** 10.Simplify Verb Phrases
+***_ Before: "She is able to write well."
+***_ After: "She writes well."
+
+** 11.Avoid Nominalizations <<uncertain>>
+***_ Before: "The manager made a decision to increase the budget."
+***_ After: "The manager decided to increase the budget."
+
+** 12.Use Contractions <<frequently>>
+***_ Before: "Do not enter the restricted area."
+***_ After: "Don't enter the restricted area."
+
+** 13.Cut Out <b><color:red>__Excessive__</b> Detail
+***_ Before: "The car, which was a red, four-door sedan, sped down the street."
+***_ After: "The red sedan sped down the street."
+
+** 14.Use <b><color:red>__Strong Verbs__</b>
+***_ Before: "He gave a presentation on the topic."
+***_ After: "He presented the topic."
+
+** 15.Avoid Repetitive Phrases
+***_ Before: "She repeated the same thing over and over again."
+***_ After: "She repeated herself."
+@endmindmap

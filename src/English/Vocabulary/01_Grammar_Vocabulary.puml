@@ -1,0 +1,69 @@
+@startmindmap
+<style>
+element {
+  MaximumWidth 350
+}
+mindmapDiagram {
+  .highlight {
+    BackgroundColor lightgreen
+  }
+  .uncertain {
+    BackgroundColor plum
+  }
+  .longer * {
+    MaximumWidth 450
+  }
+}
+</style>
+
+*[#orange] <&flag>Vocabulary
+**[#lightgreen] Verb
+***:--From 16th June--
+<b><color:red>Eliminate/ɪˈlɪmɪneɪt/</b>: Loại bỏ
+;
+**[#lightgreen] Phrasal verb
+
+left side
+** Sentence components <<highlight>>
+***:--Main Concepts--
+- <b><color:red>01.Subject/ˈpredɪkət/</b>: chủ ngữ, the person or thing that performs the action described by the verb
+- <b><color:red>02.Predicate/ˈpredɪkət/</b>: vị ngữ, the part of a sentence that gives information about the subject
+- <b><color:red>03.Object</b> : tân ngữ, in grammar, the person or thing that is affected by the action of the verb
+- <b><color:red>04.Modifier</b> : in grammar, a word that <b><color:red>__describes or limits__</b> the meaning of another word
+- <b><color:red>05.Complement</b>: a word or phrase that comes after the verb and gives more information about <b><color:red>__the subject of the verb__
+- <b><color:red>06.preposition</b>: a word or group of words that is used before a noun or pronoun to show place, direction, time, etc
+- <b><color:red>07.infinitive</b>: the basic form of a verb that usually follows <b><color:red>__'to'__
+- <b><color:red>08.Gerund/ˈdʒerənd/</b>: a noun made from the form of a verb that ends with <b><color:red>__-ing__
+- <b><color:red>09.Pronoun</b>: a word that is used instead of a noun which has usually already been talked about
+
+- <b><color:red>10.Participle</b>: the form of a verb that in English usually ends in "ed" or "ing" and is used as an <b><color:red>__adjective__
+
+- <b><color:red>Conjunction</b>: a word such as 'and', 'but', 'while', or 'although' that connects words, phrases, and clauses in a sentence
+' Coordinating Conjunction
+
+'Adverbial/ədˈvɜː.bi.əl/ Phrase
+- <b><color:red>Participle phrase vs Infinitive phrase vs Gerund phrase?
+
+- <b><color:red>9.Clause</b>: a group of words containing a subject and a verb, that is usually only part of a sentence
+- Main Clause
+- Relative Clause && Relative pronoun
+-
+; <<longer>>
+
+'modifier and complement: sửa đổi và bổ sung
+**[#lightgreen] Noun
+***:--From 16th June--
+<b><color:red>antecedent/ˌæn.tiˈsiː.dənt/</b>: a word or phrase that a pronoun refers back to
+
+;
+
+**[#lightgreen] Adj
+***:--From 16th June--
+<b><color:red>concise/kənˈsaɪs/</b>: ngắn gọn
+<b><color:red>probable/ˈprɒbəbl/</b>: có thể xảy ra
+
+
+;
+
+**[#lightgreen] Adv
+@endmindmap

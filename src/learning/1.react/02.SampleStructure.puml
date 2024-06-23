@@ -1,0 +1,13 @@
+@startmindmap
+
+
+* <&flag>index.tsx
+** App.tsx
+*** ProjectsPage.tsx
+**** ProjectList.tsx
+***** ProjectCard.tsx
+****** Project.ts
+
+**** MockProjects.ts
+
+@endmindmap

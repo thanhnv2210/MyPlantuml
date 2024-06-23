@@ -1,0 +1,59 @@
+@startmindmap
+<style>
+element {
+  MaximumWidth 400
+}
+mindmapDiagram {
+  .highlight {
+    BackgroundColor lightgreen
+  }
+  .uncertain {
+    BackgroundColor plum
+  }
+}
+</style>
+
+*[#Orange] <&flag>Preposition
+
+left side
+** 1.Place <<highlight>>
+***_ Definition: Indicate location or position.
+***_ Example: at, in, on, above, below, under, between, among, next to, beside, behind, in front of, near, over, inside, outside, beneath, across
+
+** 2.Time
+***_ Definition: Indicate time or duration.
+***_ Example: at, on, in, during, for, since, by, until, before, after, from...to, <b><color:red>throughout, within
+
+** 3.Direction or Movement
+***_ Definition: Indicate direction or movement.
+***_ Example: to, into, through, across, along, from, out of, onto, up, down, <b><color:red>towards
+
+** 4.Manner
+***_ Definition:
+***_ Example: by, with, like, as, in
+
+** 5.Agent or Instrument
+***_ Definition: Indicate the agent performing an action or the instrument used.
+***_ Example: by, with
+
+right side
+** 6.Cause, Reason, or Purpose <<highlight>>
+***_ Definition: Indicate the cause, reason, or purpose of an action.
+***_ Example: for, because of, due to, owing to, on account of
+
+** 7.Possession <<uncertain>>
+***_ Definition: Indicate possession or relationship.
+***_ Example: of, with, to, belonging to
+
+** 8.Comparison
+***_ Definition:Indicate comparison between elements.
+***_ Example: like, as, than
+
+** 9.Compound Prepositions <<highlight>>
+***_ Definition: <b><color:red>Formed by combining two or more words
+***_ Example: according to, because of, due to, instead of, in front of, on behalf of, in spite of, apart from
+
+** 10.Phrasal Prepositions
+***_ Definition: Similar to compound prepositions, these are phrases that function as prepositions
+***_ Example: in addition to, in front of, in place of, on account of, with regard to
+@endmindmap
