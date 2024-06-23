@@ -1,0 +1,4 @@
+Chantainya
+- rag llm
+- langchain
+- vectorDB: Datastax

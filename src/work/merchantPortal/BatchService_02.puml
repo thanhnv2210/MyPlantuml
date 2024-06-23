@@ -1,0 +1,29 @@
+@startmindmap
+*[#Orange] <&flag>Batch Config
+** JobLauncher
+*** JobRepository
+*** @Bean(name = "dashJobLauncher")\npublic JobLauncher simpleJobLauncher()
+** JobListener
+*** JobListener  implements JobExecutionListener\nbeforeJob and afterJob
+
+** Job
+
+left side
+** JobLauncher
+*** @Scheduled
+*** @Scheduled
+
+** Flow
+***:--Scheduled Flow--
+1.@EnableScheduling -> 2.@Scheduled ->
+3.JobLauncher(@Bean) -> 4.JobExecution.run(5.Job, 6.JobParameters) -> 7.JobListener -> 8.Step.execute ->
+
+Job(@Bean) -> sSiongSettlementJob, s11TransactionJob, smrtTransactionJob ...
+- Job.start
+->
+
+<b><color:red>ShengSiongSettlementBean
+
+<b><color:red>JobRepository --> ? maybe we don't load the job from DB config;
+
+@endmindmap

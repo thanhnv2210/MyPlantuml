@@ -1,0 +1,264 @@
+@startuml
+title CHECK, VALIDATE, CONFIRM, Approve Remittance support NETSCLICK
+
+skinparam shadowing<<legendnote>> false
+skinparam note<<legendnote>> {
+    backgroundcolor red
+}
+
+concise "." as HEADER
+concise "NETSCLICK(PS)" as PS
+concise "Dash Wallet(TS)" as TS
+concise "Detail Steps(UR)" as UR
+concise "User Step(US)" as US
+concise "RemittanceStatus-HappyCase-DB Saving(HC)" as HC
+'concise "RemittanceStatus-HappyCase" as HC
+concise "Callback" as CB
+concise "Batch Service" as BS
+concise "UnhappyCases(UC)" as UC
+'concise "Thunes Adapter" as TA
+
+@0
+US is "1.CHECK"
+UR is "RequiredInfo"
+UC is {-}
+note top of UR
+<color:green>POST /api/v2/remittance
+Headers:
+- <color:red>partner-id,correlation-id,x-api-key,cipher-text
+timestamp,nonce,accept-language
+'--check-correlation-id--
+- <color:blue>__(*)device-id__
+Body:
+- <color:red>beneMsisdn,amount,currencyFlag(0|1),serviceId,
+<color:red>remitFlag=__CHECK__(SUBMIT)
+'--mobileDeviceId--
+'- <color:blue>__(*)deviceInfo__</color>:For Forter integration
+- <color:blue>__(*)cardId__</color>:ML unique UUID
+- <color:blue>__paymentMode__</color>(dashwallet|netsclick)
+end note
+
+note top of UC
+Exception:
+- CHECK_GREY_LIST_FAIL
+- DASH_USER_IN_GREY_LIST
+end note
+
+note bottom of UC
+Exception:
+- PAYMENT_VALIDATED_FAILED
+- DEFAULT_ERROR_REMITTANCEBYSELF_READONLY
+end note
+
+note bottom of UR
+- Bene Information
+(Customer Service)
+'- CustomerExtensionData(Utility Service)
+- <color:red>Service Detail
+(Product Service)
+end note
+
+@100
+UR is "Grey List?"
+
+@150
+note top of HC
+- PAYMENT_VALIDATED, check-correlation-id
+- paymentMethod, cardId, msisdn,beneMsisdn, ...
+end note
+
+@200
+UR is "Get Quotation"
+
+note bottom of UR
+<color:green> Response SUCCESSFUL
+Headers:
+- <color:green>check-correlation-id
+Body:
+- <color:red>msisdn,beneMsisdn,localCurr,
+<color:red>localAmount,beneCurr,beneAmount,
+<color:red>localNetAmount,fxRate
+,beneAmountWithTax,localcomm,localTax
+- <color:green>__paymentMethod__,__cardId__</color>
+(netsclick|wallet|paynow)
+end note
+
+@300
+UR is "Create Transaction" #cyan
+
+@400
+HC is "DB Insert"
+
+@500
+US is "2.Validate"#LightCyan;line:Aqua
+UR is "Forter"
+HC is {-}
+UR -> HC: Save transaction
+
+@600
+HC is "DB update"
+
+@700
+HC is {-}
+UR -> HC: update Fraud Info
+UR is "AML Scan"
+
+@800
+note top of HC
+PAYMENT_ACCEPTED
+* prevent double CONFIRM
+end note
+
+@900
+HC is "DB update"
+
+@1000
+US is "3.Confirm"
+UR is "Payment"  #red;line:Aqua
+TS is "RemittanceBySelfFunction"
+PS is "Purchase" #cyan
+HC is {-}
+UR -> PS
+UR -> TS
+UR -> HC
+
+note top of HC
+PAYMENT_RESERVED
+end note
+
+note top of UC
+PAYMENT_RESERVED_FAILED
+PAYMENT_TIMEOUT
+end note
+
+note top of PS
+<color:orange>SOF_PAY_PENDING
+[00] -> <color:blue>SOF_PAY_COMPLETED
+[U9] -> <color:blue>SOF_PIN_REQUIRED
+[Other] -> SOF_PAY_FAILED
+[TIMEOUT] -> SOF_PAY_PENDING? should update anything?
+end note
+
+@1100
+HC is "DB update"
+
+
+@1200
+PS is "Remittance for Virtual brand" #cyan
+HC is {-}
+
+UR -> HC
+
+note bottom of UC
+TRANSACTION_FAILED
+TRANSACTION_TIMEOUT
+PAYMENT_REFUND_REQUIRED
+end note
+
+
+note bottom of PS
+<color:orange>SOF_PAY_COMPLETED
+[] -> <color:blue>REMIT_BY_TELEPIN_SUBMITTED
+[] -> REMIT_BY_TELEPIN_FAILED
+[] -> REMIT_BY_TELEPIN_TIMEOUT
+end note
+
+@1250
+note top of HC
+<color:blue>REMIT_BY_TELEPIN_SUBMITTED
+end note
+
+note bottom of TS
+<color:blue>TRANSACTION_SUCCESS
+?TRANSACTION_FAILED
+end note
+
+@1400
+HC is "DB update"
+
+@1500
+PS is {hidden}
+UR is {hidden}
+TS is {hidden}
+BS is "4.Batch Job before __SUBMITTED__" #yellow
+US is {-}
+HC is {-}
+UC -> BS:
+note top of BS
+PAYMENT_REFUND_REQUIRED
+REFUND_FAILED
+end note
+
+@1550
+note top of HC
+REFUNDED
+TRANSACTION_SUBMITTED
+end note
+
+@1750
+PS is "Approve with soft" #cyan;line:Aqua
+US is "5.Approve" #LightCyan;line:Aqua;line.dotted
+HC is {-}
+US -> PS
+BS -> HC: - 1. Timeout check \n-2. Refund (if need)
+
+note top of PS
+<color:orange>SOF_PIN_REQUIRED
+<color:blue>SOF_PAY_COMPLETED
+<color:blue>REMIT_BY_TELEPIN_SUBMITTED
+[] -> REMIT_BY_TELEPIN_FAILED
+[] -> REMIT_BY_TELEPIN_TIMEOUT
+end note
+
+note top of UR
+SOF_PAY_FAILED ?
+end note
+
+
+@2000
+US is {-}
+PS is {hidden}
+PS -> US
+
+@2150
+
+
+@2250
+CB is "7.Callback" #orange
+BS is {-}
+BS -> HC:
+'- 1. Timeout check \n-2. Refund (if need)
+
+@2300
+note top of HC
+TRANSACTION_COMPLETED
+end note
+
+note top of UC
+TRANSACTION_REVERSED
+end note
+
+note bottom of UC
+TRANSACTION_DECLINED
+TRANSACTION_REJECTED
+<color:red>TRANSACTION_CANCELLED (auto or manually)
+end note
+
+@2400
+HC is "DB update"
+
+@2500
+CB is {hidden}
+HC is {-}
+BS is "8.Batch Job" #yellow;line:Aqua
+
+
+@3000
+'T1 is {-}
+highlight 0 to 500 #lightgrey;line:DimGrey : <b><color:blue>POST</color> /api/v2/remittance
+highlight 500 to 1000 #Gold;line:DimGrey : <b><color:blue>POST</color> /api/v2/remittances\n/{check-correlation-id}/validate
+highlight 1000 to 1500 #lightgreen;line:DimGrey : <b><color:blue>POST</color> /v2/remittances\n/{check-correlation-id}/submit
+highlight 1750 to 2000 #lightgreen;line:DimGrey : <b><color:blue>POST</color> /v2/remittances\n/{check-correlation-id}/approve
+highlight 2250 to 2500 #lightgreen;line:DimGrey : <b><color:blue>POST</color> /v2/remittances\n/{check-correlation-id}/submit
+
+@enduml

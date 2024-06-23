@@ -1,0 +1,61 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+control ShengSiongSettlementBean as BJ #green
+control MerchantServiceDao as MS
+control MpTransactionHistoryEntityFacadeDAOImpl as DAO
+database MLPortal as DB
+control ftpUtil as ftp
+control "-CDRBean\n-CDR6hrBean" as CDR
+
+note over CDR
+CDRBean: <b><color:red>(2)04:00 AM and 6:15 AM
+cbrp_vsalesjournal_domestic_{DDMMYYYY}.0001.txt
+<b><color:red>*Note that: if the first job successful, the second job will ignore this file.
+'2024-05-21 06:15:00 DEBUG CDRBean - CDR file is already processed.
+CDR6hrBean: <b><color:red>(4)07:10 AM, 01:10 PM, 03:10 PM, 07:10 PM
+<b><color:red>cron: 0 10 __07/13/15/19__ * * ?
+cbrp_vsalesjournal_domestic_{DDMMYYYY}_{HHMM}.{0001}.txt
+- impTime:0000|0600|1200|1800
+cdrLocalDir: CDR_LOCAL_DIR
+end note
+
+CDR -> CDR: fileName
+CDR -> DB: doCheckExisting by fileName
+DB -> CDR: table <b><color:red>MP_DATATRANSFER_TRANSFER_LOG(TRANSFER_FILE)
+CDR -> ftp: downloadSFTPData\n- cdrLocalDir\n- fileName\n- {FTP_REMOTE_DIR}
+ftp -> CDR: Download file success
+CDR -> CDR: readCDRData
+CDR -> CDR: Mapper: String[] -> MpSalesTransactionHistoryDTO
+CDR -> DB:
+note over CDR, DB
+begin to save data
+<b><color:red>- remvoeSalesTransactionHistoryInfo
+<b><color:blue>- insertSalesTransactionHistoryInfo
+Insert data into table MP_SALES_TRANSACTION_HISTORY. Record count:
+end note
+
+note over BJ
+filePathConfig: SHENGSIONG_FTP_DIR
+remotePath: SHENGSIONG_RP_FTP_DIR
+currentEnv: CURRENT_ENV
+<b><color:red>ShengSiongSettlementBean: 05:00 AM (0 00 05 * * ?)
+<b><color:red>.shengSiongSettlementMain(String uDay, String indi)
+- merchantName:"Sheng Siong"
+- defaultDataLoadPreviousDay: 1
+end note
+
+BJ -> BJ: indicator==1 ? Primary : Secondary
+BJ -> BJ: fileName = {filePathConfig}Dash_{merchantName}_{RefCalendar:yyyyMMdd2359}.csv\n<b><color:red>/app/batchjob/sftp/shengsiong/settlement/Dash_Sheng Siong_202405192359.csv
+
+BJ -> MS:
+MS -> DAO: <b><color:red>doSelectAllbySearch
+DAO -> DAO: query build by funny code :D
+DAO -> DB: MP_SALES_TRANSACTION_HISTORY\n- DEST_GROUP LIKE '%" + destGroup + "%'
+DB -> DAO: List<Object[]>
+DAO -> MS:
+MS -> MS: Mapper List<Object[]> -> List<MpSalesTransactionHistoryDTO>
+MS -> BJ:
+BJ -> BJ: Mapper MpSalesTransactionHistoryDTO -> TCSTransactionDTO
+@enduml

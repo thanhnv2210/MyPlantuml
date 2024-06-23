@@ -1,0 +1,60 @@
+@startuml
+
+concise "Case 1 Refunded on same day" as C1
+concise "Case 2 Refunded on next day" as C2
+clock "Refund Job" as BS with period 300 pulse 5 offset 50
+'clock   "Time" as T1 with period 500 pulse 1 offset 0
+'concise "Time" as T
+concise "Report Date" as R
+
+
+@0
+R is "Report T"
+note top of C1
+Status: TRANSACTION_COMPLETED
+HubStatus: COMPLETED
+end note
+note top of C2
+Status: TRANSACTION_COMPLETED
+HubStatus: COMPLETED
+end note
+
+@50
+
+@200
+note bottom of C1
+Status: TRANSACTION_REVERSED
+HubStatus: REVERSED
+end note
+
+@350
+note top of C1
+Status: REFUNDED
+HubStatus: REVERSED
+end note
+
+C1 -> R: REFUNDED\n\n\n
+
+@400
+note bottom of C2
+Status: TRANSACTION_REVERSED
+HubStatus: REVERSED
+end note
+C2 -> R: TRANSACTION_REVERSED
+
+@500
+R is "Report T+1"
+
+@650
+note top of C2
+Status: REFUNDED
+HubStatus: REVERSED
+end note
+C2 -> R: REFUNDED\n\n\n
+
+@1000
+R is {hidden}
+
+highlight 500 to 1000 #Gold;line:DimGrey : Report T + 1
+
+@enduml
